@@ -153,4 +153,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff25ee0e3ab68a42afb5a583a866aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickableItem
-  <ItemData>k__BackingField: {fileID: 11400000, guid: 6e20d4ab89d597b47808191d7427d48e, type: 2}
+  <ItemData>k__BackingField: {fileID: 11400000, guid: 812930762c4a03a4aaa37b869d82478d, type: 2}

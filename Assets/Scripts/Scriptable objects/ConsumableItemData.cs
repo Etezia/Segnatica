@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "ConsumableItemData", menuName = "Scriptable Objects/EdibleItemData")]
+[CreateAssetMenu(fileName = "ConsumableItemData", menuName = "Scriptable Objects/Consumable Item Data")]
 public class ConsumableItemData : ItemData
 {
 	[field: SerializeField] public int HungerRecovery { get; private set; }

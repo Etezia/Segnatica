@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "Natural Needs Config", menuName = "Scriptable Objects/NaturalNeedsData")]
+[CreateAssetMenu(fileName = "NaturalNeedsConfig", menuName = "Scriptable Objects/Natural Needs Data")]
 public class NaturalNeedsConfig : ScriptableObject
 {
 	[field: SerializeField] public float HungerIncreasingCoeff { get; private set; }

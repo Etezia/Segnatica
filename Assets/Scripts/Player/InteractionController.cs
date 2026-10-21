@@ -50,15 +50,13 @@ public class InteractionController : MonoBehaviour
 
 		if (currTarget.TryGetComponent<PickableItem>(out var pickableItemComponent))
 		{
-			print("picked");
+			if (!inventoryManager.IsFull)
+			{
+				inventoryManager.AddItem(new InventoryItem(pickableItemComponent.ItemData), pickableItemComponent.Count);
 
-
-			Destroy(currTarget);
-			currTarget = null;
-		}
-		else if (currTarget.TryGetComponent<InteractableItem>(out var interactableItemComponent))
-		{
-			print("interact");
+				Destroy(currTarget);
+				currTarget = null;
+			}
 		}
 	}
 }

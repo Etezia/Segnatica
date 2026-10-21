@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "Character Movement Data", menuName = "Scriptable Objects/CharacterMovementData")]
+[CreateAssetMenu(fileName = "Character Movement Data", menuName = "Scriptable Objects/Character Movement Data")]
 public class CharacterMovementData : ScriptableObject
 {
 	[field: SerializeField] public float BasicSpeed { get; private set; }
