@@ -62,7 +62,7 @@ public class MovementController : MonoBehaviour
 
 		if (charController.isGrounded)
 		{
-			currVelocity = new Vector3(
+			currVelocity = transform.rotation * new Vector3(
 				inputMoveVector.x * currHorizontalSpeed, currVerticalSpeed, inputMoveVector.y * movementData.SideSpeedCoeff * currHorizontalSpeed);
 
 			if (inputMoveVector.y < 0)
@@ -75,7 +75,7 @@ public class MovementController : MonoBehaviour
 			currVelocity.y = currVerticalSpeed;
 		}
 
-		charController.Move(transform.rotation * currVelocity * Time.deltaTime);
+		charController.Move(currVelocity * Time.deltaTime);
 	}
 
 	private void ApplyGravityForce()

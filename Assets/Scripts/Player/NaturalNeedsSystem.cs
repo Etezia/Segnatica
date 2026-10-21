@@ -7,6 +7,9 @@ public class NaturalNeedsSystem : MonoBehaviour
 	[SerializeField] private float currSatiety;
 	[SerializeField] private float currHydration;
 
+	private float satietyRatio => currSatiety / needsConfig.MaxSatiety;
+	private float hydrationRatio => currHydration / needsConfig.MaxHydration;
+
 	public float CurrSatiety { 
 		get => currSatiety; 
 		private set => currSatiety = Mathf.Clamp(value, 0f, needsConfig.MaxSatiety); 
@@ -16,8 +19,8 @@ public class NaturalNeedsSystem : MonoBehaviour
 		private set => currHydration = Mathf.Clamp(value, 0f, needsConfig.MaxHydration); 
 	}
 
-	public event Action OnSatietyValueChange;
-	public event Action OnHydrationValueChange;
+	public event Action<float> OnSatietyValueChange;
+	public event Action<float> OnHydrationValueChange;
 
 	private void Awake()
 	{
@@ -30,8 +33,8 @@ public class NaturalNeedsSystem : MonoBehaviour
 		CurrSatiety -= needsConfig.HungerIncreasingCoeff * Time.deltaTime;
 		CurrHydration -= needsConfig.ThurstIncreasingCoeff * Time.deltaTime;
 
-		OnSatietyValueChange?.Invoke();
-		OnHydrationValueChange?.Invoke();
+		OnSatietyValueChange?.Invoke(satietyRatio);
+		OnHydrationValueChange?.Invoke(hydrationRatio);
 	}
 
 	public void IncreaseSatiety(float value) => CurrSatiety += value;
