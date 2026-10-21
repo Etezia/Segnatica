@@ -183,13 +183,22 @@
             ]
         },
         {
-            "name": "Menues",
+            "name": "UI",
             "id": "5da9fba4-436e-4555-bf8c-3bfe36a98cae",
             "actions": [
                 {
                     "name": "Pause",
                     "type": "Button",
                     "id": "182d2ca9-0980-4b7b-b07e-d20c913d06ab",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenJournal",
+                    "type": "Button",
+                    "id": "85a93d1e-3267-480b-9b68-e47098787b54",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -205,6 +214,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "db43df7a-9fdb-4acb-ad85-a0dcf9987acf",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "OpenJournal",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

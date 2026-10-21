@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4babf0bddbefe7b4eafdc7c42c49badb, type: 3}
   m_Name: PlayerNeedsData
   m_EditorClassIdentifier: Assembly-CSharp::NaturalNeedsConfig
-  <HungerIncreasingCoeff>k__BackingField: 3
-  <ThurstIncreasingCoeff>k__BackingField: 3
+  <HungerIncreasingCoeff>k__BackingField: 2
+  <ThurstIncreasingCoeff>k__BackingField: 2
   <MaxSatiety>k__BackingField: 100
   <MaxHydration>k__BackingField: 100

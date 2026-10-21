@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class NaturalNeedsSystem : MonoBehaviour
 {
+	public NaturalNeedsSystem Instance { get; private set; }
+
     [SerializeField] private NaturalNeedsConfig needsConfig;
 	[SerializeField] private float currSatiety;
 	[SerializeField] private float currHydration;
@@ -24,7 +26,12 @@ public class NaturalNeedsSystem : MonoBehaviour
 
 	private void Awake()
 	{
-		CurrSatiety = needsConfig.MaxSatiety;
+		if (Instance == null)
+			Instance = this;
+		else
+			Destroy(this.gameObject);
+
+			CurrSatiety = needsConfig.MaxSatiety;
 		CurrHydration = needsConfig.MaxHydration;
 	}
 
