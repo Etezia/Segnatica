@@ -1,16 +1,14 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
-public class InventoryItem : MonoBehaviour
+public class InventoryItem
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    private ItemData itemData;
 
-    // Update is called once per frame
-    void Update()
+    public int Id => itemData.Id;
+
+	public InventoryItem(ItemData itemData)
     {
-        
+        this.itemData = itemData;
     }
 }

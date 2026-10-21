@@ -38,7 +38,7 @@ public class NaturalNeedsSystem : MonoBehaviour
 	private void Update()
 	{
 		CurrSatiety -= needsConfig.HungerIncreasingCoeff * Time.deltaTime;
-		CurrHydration -= needsConfig.ThurstIncreasingCoeff * Time.deltaTime;
+		CurrHydration -= needsConfig.ThirstIncreasingCoeff * Time.deltaTime;
 
 		OnSatietyValueChange?.Invoke(satietyRatio);
 		OnHydrationValueChange?.Invoke(hydrationRatio);

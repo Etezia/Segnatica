@@ -196,7 +196,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "OpenJournal",
+                    "name": "OpenInventory",
                     "type": "Button",
                     "id": "85a93d1e-3267-480b-9b68-e47098787b54",
                     "expectedControlType": "",
@@ -224,7 +224,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "OpenJournal",
+                    "action": "OpenInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
