@@ -8,66 +8,96 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private InventoryCell inventoryCellPrefab;
 
     [SerializeField] private int initialCellCount = 35;
-	private int currCellIndex = 0;
+	private int slotsCount = 0;
 
 	private List<SlotEntry> slotEntries;
+	private Dictionary<int, int> itemCountById;
 
 	public bool IsFull { get; private set; } = false;
 	
 	private void Awake()
 	{
 		slotEntries = new List<SlotEntry>();
+		itemCountById = new Dictionary<int, int>();
 
 		for (var i = 0; i < initialCellCount; i++)
 		{
 			var cell = Instantiate(inventoryCellPrefab, cellPanel);
 			slotEntries.Add(new SlotEntry(cell));
-
-			currCellIndex = i;
-			cell.Index = currCellIndex;
+			cell.Index = slotsCount;
 		}
+		slotsCount = initialCellCount;
 	}
 	
-	public void AddItem(InventoryItem item, int itemsCount)
+	public int AddItemsIfPossible(InventoryItem item, int itemsCount)
 	{
-		var slotsCount = slotEntries.Count;
+		print("add");
 		var currItem = item.ItemData;
+		var isStackable = currItem.IsStackable;
+
+		if (!itemCountById.ContainsKey(currItem.Id))
+			itemCountById.Add(currItem.Id, 0);
 
 		for (var i = 0; i < slotsCount; i++)
 		{
 			var currSlotEntry = slotEntries[i];
 			var currCell = currSlotEntry.Cell;
-			var slotItem = currSlotEntry.Item?.ItemData;
 
-			if (slotItem == null)
+			if (currSlotEntry.Item == null)
 			{
 				currCell.ItemIcon.gameObject.SetActive(true);
 				currCell.ItemIcon.sprite = currItem.Icon;
 				currSlotEntry.Item = item;
 
-				if (currItem.IsStackable)
+				if (isStackable)
 				{
 					currSlotEntry.ItemsCount = Mathf.Clamp(itemsCount, 0, currItem.MaxStackSize);
 					itemsCount -= currSlotEntry.ItemsCount;
-				}
+					itemCountById[currItem.Id] += currSlotEntry.ItemsCount;
 
-				if (!currItem.IsStackable || itemsCount == 0)
-					break;
+					currCell.ItemsCountText.gameObject.SetActive(true);
+					currCell.ItemsCountText.text = currSlotEntry.ItemsCount.ToString();
+				}
+				else
+				{
+					itemCountById[currItem.Id]++;
+					currSlotEntry.ItemsCount = 1;
+					itemsCount -= 1;
+				}
 			}
 			else
 			{
-				if (!currItem.IsStackable || currSlotEntry.ItemsCount + itemsCount >= slotItem.MaxStackSize)
+				var initSlotItemsCount = currSlotEntry.ItemsCount;
+				if (!isStackable || currItem.Id != currSlotEntry.Item.Id || 
+					initSlotItemsCount + itemsCount > currItem.MaxStackSize)
 					continue;
 
+				currSlotEntry.ItemsCount = Mathf.Clamp(initSlotItemsCount + itemsCount, 0, currItem.MaxStackSize);
+				itemsCount -= currSlotEntry.ItemsCount - initSlotItemsCount;
 
+				currCell.ItemsCountText.text = currSlotEntry.ItemsCount.ToString();
 			}
 
-			if (i == slotsCount - 1)
+			if (i == slotsCount - 1 && (!isStackable || isStackable && currSlotEntry.ItemsCount == currItem.MaxStackSize))
+			{
 				IsFull = true;
+				print("full");
+				return itemsCount;
+			}
+
+			if (itemsCount == 0)
+				break;
 		}
+
+		return itemsCount;
 	}
 
-	public void RemoveItem()
+	public void RemoveItemsFromSlot(int index)
+	{
+
+	}
+
+	private void RemoveItems(int count)
 	{
 
 	}

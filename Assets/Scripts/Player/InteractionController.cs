@@ -52,10 +52,17 @@ public class InteractionController : MonoBehaviour
 		{
 			if (!inventoryManager.IsFull)
 			{
-				inventoryManager.AddItem(new InventoryItem(pickableItemComponent.ItemData), pickableItemComponent.Count);
+				var itemsLeft = inventoryManager.AddItemsIfPossible(new InventoryItem(pickableItemComponent.ItemData), pickableItemComponent.Count);
 
-				Destroy(currTarget);
-				currTarget = null;
+				if (itemsLeft == 0)
+				{
+					Destroy(currTarget);
+					currTarget = null;
+				}
+				else
+				{
+					pickableItemComponent.Count = itemsLeft;
+				}
 			}
 		}
 	}

@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 666efc0b47296ad4c891ca105cff0ada, type: 3}
   m_Name: Bread
   m_EditorClassIdentifier: Assembly-CSharp::ConsumableItemData
-  <Id>k__BackingField: 0
-  <Name>k__BackingField: 
-  <Icon>k__BackingField: {fileID: 0}
-  <Description>k__BackingField: 
+  <Id>k__BackingField: 1
+  <Name>k__BackingField: Bread
+  <Icon>k__BackingField: {fileID: 21300000, guid: a31026a30babe22488d8414c3bee8118, type: 3}
+  <Description>k__BackingField: 'The loaf of dry bread. Edible. Mostly '
   <Type>k__BackingField: 0
-  <IsStackable>k__BackingField: 0
+  <IsStackable>k__BackingField: 1
   <IsEquipable>k__BackingField: 0
-  <MaxStackSize>k__BackingField: 0
-  <PhysicalObject>k__BackingField: {fileID: 0}
-  <HungerRecovery>k__BackingField: 0
-  <ThirstRecovery>k__BackingField: 0
+  <MaxStackSize>k__BackingField: 10
+  <PhysicalObject>k__BackingField: {fileID: 5713102062098458820, guid: 0ded0b37b0067154699b8486ce3211f3, type: 3}
+  <HungerRecovery>k__BackingField: 25
+  <ThirstRecovery>k__BackingField: -10

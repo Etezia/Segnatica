@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   <Id>k__BackingField: 0
   <Name>k__BackingField: Wooden plank
-  <Icon>k__BackingField: {fileID: 21300000, guid: a31026a30babe22488d8414c3bee8118, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 64fc6cc98a9be614987f883d2e407268, type: 3}
   <Description>k__BackingField: Can be used for building or crafting simple wooden
     tools or weapons
   <Type>k__BackingField: 7
