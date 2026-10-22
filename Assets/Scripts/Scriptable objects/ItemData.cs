@@ -16,7 +16,7 @@ public class ItemData : ScriptableObject
 	[field: SerializeField] public bool IsEquipable { get; protected set; }
 	[field: SerializeField] public int MaxStackSize { get; protected set; }
 
-	[field: SerializeField] public GameObject PhysicalObject { get; protected set; }
+	[field: SerializeField] public PickableItem PhysicalObject { get; protected set; }
 	//[field: SerializeField] public Transform ObjectHoldingPoint { get; protected set; }
 	//[field: SerializeField] public Transform ObjectUsingAnimation { get; protected set; }
 

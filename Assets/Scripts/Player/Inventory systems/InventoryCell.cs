@@ -12,7 +12,14 @@ public class InventoryCell : MonoBehaviour, IPointerClickHandler
 
     public int Index { get; set; }
 
-    public event Action<int> OnClick;
+    public event Action<int> OnRMBClick;
 
-    public void OnPointerClick(PointerEventData eventData) => OnClick?.Invoke(Index);
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+			OnRMBClick?.Invoke(Index);
+            print("clicked");
+		}
+	}
 }

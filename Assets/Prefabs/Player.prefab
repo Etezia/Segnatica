@@ -178,6 +178,37 @@ MonoBehaviour:
     m_Bits: 384
   maxInteractDistance: 5
   inputSystem: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+--- !u!1 &4140940528850208462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 171794198303345268}
+  m_Layer: 3
+  m_Name: Item drop point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &171794198303345268
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4140940528850208462}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.173, z: 1.483}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4332832564437635290}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6636072680992011002
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,6 +223,7 @@ GameObject:
   - component: {fileID: 5001685514207205669}
   - component: {fileID: 6632119761648250253}
   - component: {fileID: 7923851744996212996}
+  - component: {fileID: 2532326535365251531}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -213,6 +245,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2231241902281873291}
+  - {fileID: 171794198303345268}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5660969629171991275
@@ -330,3 +363,16 @@ MonoBehaviour:
   needsConfig: {fileID: 11400000, guid: 9af2e88f1725ec740b519ab41715d7be, type: 2}
   currSatiety: 200
   currHydration: 200
+--- !u!114 &2532326535365251531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6636072680992011002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8355639657ec59e488a525c01e639602, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSockets
+  <ItemDropPoint>k__BackingField: {fileID: 171794198303345268}

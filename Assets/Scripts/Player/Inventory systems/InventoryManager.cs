@@ -24,14 +24,25 @@ public class InventoryManager : MonoBehaviour
 		{
 			var cell = Instantiate(inventoryCellPrefab, cellPanel);
 			slotEntries.Add(new SlotEntry(cell));
-			cell.Index = slotsCount;
+			cell.Index = i;
 		}
 		slotsCount = initialCellCount;
 	}
-	
+
+	private void OnEnable()
+	{
+		foreach (var entry in slotEntries)
+			entry.Cell.OnRMBClick += RemoveItemsFromSlot;
+	}
+
+	private void OnDisable()
+	{
+		foreach (var entry in slotEntries)
+			entry.Cell.OnRMBClick -= RemoveItemsFromSlot;
+	}
+
 	public int AddItemsIfPossible(InventoryItem item, int itemsCount)
 	{
-		print("add");
 		var currItem = item.ItemData;
 		var isStackable = currItem.IsStackable;
 
@@ -81,7 +92,6 @@ public class InventoryManager : MonoBehaviour
 			if (i == slotsCount - 1 && (!isStackable || isStackable && currSlotEntry.ItemsCount == currItem.MaxStackSize))
 			{
 				IsFull = true;
-				print("full");
 				return itemsCount;
 			}
 
@@ -94,7 +104,25 @@ public class InventoryManager : MonoBehaviour
 
 	public void RemoveItemsFromSlot(int index)
 	{
+		var entry = slotEntries[index];
+		if (entry.Item == null)
+		{
+			print("nope");
+			return;
+		}
 
+		var cell = entry.Cell;
+
+		var itemInstance = Instantiate(entry.Item.ItemData.PhysicalObject, PlayerSockets.Instance.ItemDropPoint.position, Quaternion.identity);
+		itemInstance.Count = entry.ItemsCount;
+
+		entry.Item = null;
+		entry.ItemsCount = 0;
+
+		entry.Cell.ItemIcon.sprite = null;
+		entry.Cell.ItemIcon.gameObject.SetActive(false);
+		entry.Cell.ItemsCountText.text = "";
+		entry.Cell.ItemsCountText.gameObject.SetActive(false);
 	}
 
 	private void RemoveItems(int count)

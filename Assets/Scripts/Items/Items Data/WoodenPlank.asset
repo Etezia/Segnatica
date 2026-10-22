@@ -21,4 +21,4 @@ MonoBehaviour:
   <IsStackable>k__BackingField: 1
   <IsEquipable>k__BackingField: 0
   <MaxStackSize>k__BackingField: 100
-  <PhysicalObject>k__BackingField: {fileID: 431328137418339976, guid: 37b1dd402bfca3c45a1c0362a42d127c, type: 3}
+  <PhysicalObject>k__BackingField: {fileID: 2865083209648567734, guid: 37b1dd402bfca3c45a1c0362a42d127c, type: 3}
