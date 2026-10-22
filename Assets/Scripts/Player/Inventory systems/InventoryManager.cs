@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -8,12 +8,16 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private InventoryCell inventoryCellPrefab;
 
     [SerializeField] private int initialCellCount = 35;
-	private int slotsCount = 0;
 
 	private List<SlotEntry> slotEntries;
 	private Dictionary<int, int> itemCountById;
 
+	public int SlotsCount { get; private set; } = 0;
+	public int UsedSlotsCount { get; private set; }
 	public bool IsFull { get; private set; } = false;
+
+	public event Action OnAddItem;
+	public event Action OnDropItem;
 	
 	private void Awake()
 	{
@@ -26,7 +30,8 @@ public class InventoryManager : MonoBehaviour
 			slotEntries.Add(new SlotEntry(cell));
 			cell.Index = i;
 		}
-		slotsCount = initialCellCount;
+		SlotsCount = initialCellCount;
+		print(SlotsCount);
 	}
 
 	private void OnEnable()
@@ -41,15 +46,14 @@ public class InventoryManager : MonoBehaviour
 			entry.Cell.OnRMBClick -= RemoveItemsFromSlot;
 	}
 
-	public int AddItemsIfPossible(InventoryItem item, int itemsCount)
+	public int AddItemsIfPossible(ItemData item, int itemsCount)
 	{
-		var currItem = item.ItemData;
-		var isStackable = currItem.IsStackable;
+		var isStackable = item.IsStackable;
 
-		if (!itemCountById.ContainsKey(currItem.Id))
-			itemCountById.Add(currItem.Id, 0);
+		if (!itemCountById.ContainsKey(item.Id))
+			itemCountById.Add(item.Id, 0);
 
-		for (var i = 0; i < slotsCount; i++)
+		for (var i = 0; i < SlotsCount; i++)
 		{
 			var currSlotEntry = slotEntries[i];
 			var currCell = currSlotEntry.Cell;
@@ -57,39 +61,42 @@ public class InventoryManager : MonoBehaviour
 			if (currSlotEntry.Item == null)
 			{
 				currCell.ItemIcon.gameObject.SetActive(true);
-				currCell.ItemIcon.sprite = currItem.Icon;
+				currCell.ItemIcon.sprite = item.Icon;
 				currSlotEntry.Item = item;
 
 				if (isStackable)
 				{
-					currSlotEntry.ItemsCount = Mathf.Clamp(itemsCount, 0, currItem.MaxStackSize);
+					currSlotEntry.ItemsCount = Mathf.Clamp(itemsCount, 0, item.MaxStackSize);
 					itemsCount -= currSlotEntry.ItemsCount;
-					itemCountById[currItem.Id] += currSlotEntry.ItemsCount;
+					itemCountById[item.Id] += currSlotEntry.ItemsCount;
 
 					currCell.ItemsCountText.gameObject.SetActive(true);
 					currCell.ItemsCountText.text = currSlotEntry.ItemsCount.ToString();
 				}
 				else
 				{
-					itemCountById[currItem.Id]++;
+					itemCountById[item.Id]++;
 					currSlotEntry.ItemsCount = 1;
 					itemsCount -= 1;
 				}
+
+				UsedSlotsCount++;
+
+				OnAddItem?.Invoke();
 			}
 			else
 			{
 				var initSlotItemsCount = currSlotEntry.ItemsCount;
-				if (!isStackable || currItem.Id != currSlotEntry.Item.Id || 
-					initSlotItemsCount + itemsCount > currItem.MaxStackSize)
+				if (!isStackable || item.Id != currSlotEntry.Item.Id || initSlotItemsCount == item.MaxStackSize)
 					continue;
 
-				currSlotEntry.ItemsCount = Mathf.Clamp(initSlotItemsCount + itemsCount, 0, currItem.MaxStackSize);
+				currSlotEntry.ItemsCount = Mathf.Clamp(initSlotItemsCount + itemsCount, 0, item.MaxStackSize);
 				itemsCount -= currSlotEntry.ItemsCount - initSlotItemsCount;
 
 				currCell.ItemsCountText.text = currSlotEntry.ItemsCount.ToString();
 			}
 
-			if (i == slotsCount - 1 && (!isStackable || isStackable && currSlotEntry.ItemsCount == currItem.MaxStackSize))
+			if (i == SlotsCount - 1 && (!isStackable || isStackable && currSlotEntry.ItemsCount == item.MaxStackSize))
 			{
 				IsFull = true;
 				return itemsCount;
@@ -106,14 +113,11 @@ public class InventoryManager : MonoBehaviour
 	{
 		var entry = slotEntries[index];
 		if (entry.Item == null)
-		{
-			print("nope");
 			return;
-		}
 
 		var cell = entry.Cell;
 
-		var itemInstance = Instantiate(entry.Item.ItemData.PhysicalObject, PlayerSockets.Instance.ItemDropPoint.position, Quaternion.identity);
+		var itemInstance = Instantiate(entry.Item.PhysicalObject, PlayerSockets.Instance.ItemDropPoint.position, Quaternion.identity);
 		itemInstance.Count = entry.ItemsCount;
 
 		entry.Item = null;
@@ -123,6 +127,10 @@ public class InventoryManager : MonoBehaviour
 		entry.Cell.ItemIcon.gameObject.SetActive(false);
 		entry.Cell.ItemsCountText.text = "";
 		entry.Cell.ItemsCountText.gameObject.SetActive(false);
+
+		UsedSlotsCount--;
+
+		OnDropItem?.Invoke();
 	}
 
 	private void RemoveItems(int count)
@@ -135,4 +143,4 @@ public class InventoryManager : MonoBehaviour
 		
 	}
 }
-//отделение вьюшки от модеши предполагается к 3786му году. готовьтесь
+//отделение вьюшки от модели предполагается к 3786му году. готовьтесь

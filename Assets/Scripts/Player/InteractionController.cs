@@ -52,7 +52,7 @@ public class InteractionController : MonoBehaviour
 		{
 			if (!inventoryManager.IsFull)
 			{
-				var itemsLeft = inventoryManager.AddItemsIfPossible(new InventoryItem(pickableItemComponent.ItemData), pickableItemComponent.Count);
+				var itemsLeft = inventoryManager.AddItemsIfPossible(pickableItemComponent.ItemData, pickableItemComponent.Count);
 
 				if (itemsLeft == 0)
 				{

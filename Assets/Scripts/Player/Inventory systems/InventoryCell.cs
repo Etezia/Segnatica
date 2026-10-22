@@ -17,9 +17,6 @@ public class InventoryCell : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Right)
-        {
 			OnRMBClick?.Invoke(Index);
-            print("clicked");
-		}
 	}
 }
