@@ -170,6 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractionController
   inventoryManager: {fileID: 0}
+  selectionHighlightShader: {fileID: 2100000, guid: 9bc12f27bf760f848ba09ff99ec91c24, type: 2}
   includedLayers:
     serializedVersion: 2
     m_Bits: 449

@@ -1,16 +1,28 @@
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InteractableItem : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    private MeshRenderer renderer;
+	private List<Material> initialMaterialsSet;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	private void Awake()
+	{
+		renderer = GetComponent<MeshRenderer>();
+		initialMaterialsSet = new List<Material>();
+		renderer.GetSharedMaterials(initialMaterialsSet);
+	}
+
+	public void AddMaterial(Material material)
+	{
+		var materials = renderer.sharedMaterials.ToList();
+		materials.Add(material);
+		renderer.SetSharedMaterials(materials);
+	}
+
+	public void ResetMaterials()
+	{
+		renderer.SetSharedMaterials(initialMaterialsSet);
+	}
 }

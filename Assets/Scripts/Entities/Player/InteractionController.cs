@@ -5,9 +5,9 @@ public class InteractionController : MonoBehaviour
 {
     [SerializeField] private InventoryManager inventoryManager;
 
+	[SerializeField] private Material selectionHighlightShader;
     [SerializeField] private LayerMask includedLayers;
 	[SerializeField] private LayerMask interactableLayers;
-
 	[SerializeField] private float maxInteractDistance;
 
     [SerializeField] private InputActionAsset inputSystem;
@@ -28,16 +28,27 @@ public class InteractionController : MonoBehaviour
 		{
 			if (hitInfo.collider != currTargetCollider)
 			{
+				if (currTarget && currTarget.TryGetComponent<InteractableItem>(out var interactableItem))
+					interactableItem.ResetMaterials();
+
 				currTargetCollider = hitInfo.collider;
 
 				if ((1 << currTargetCollider.gameObject.layer & interactableLayers) != 0)
+				{
 					currTarget = currTargetCollider.gameObject;
+					currTarget.GetComponent<InteractableItem>().AddMaterial(selectionHighlightShader);
+				}
 				else
+				{
 					currTarget = null;
+				}
 			}
 		}
 		else
 		{
+			if (currTarget && currTarget.TryGetComponent<InteractableItem>(out var interactableItem))
+				interactableItem.ResetMaterials();
+
 			currTargetCollider = null;
 			currTarget = null;
 		}
