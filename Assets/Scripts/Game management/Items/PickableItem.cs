@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PickableItem : MonoBehaviour
 {
     [field: SerializeField] public ItemData ItemData { get; private set; }

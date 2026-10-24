@@ -229,6 +229,74 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "BuildingSystem",
+            "id": "20b82edf-aa3f-462e-94e3-4d8c97156488",
+            "actions": [
+                {
+                    "name": "DebugConstructionSpawn",
+                    "type": "Button",
+                    "id": "c13e2a3b-4749-4b2a-bdf0-dea2de12b253",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CancelPlacement",
+                    "type": "Button",
+                    "id": "aa935a5b-8f72-46f6-8c0c-02fd0426576f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Rotate",
+                    "type": "Value",
+                    "id": "44f47b24-b864-4f77-8c81-036e69f5e2e5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c92a06ad-9ad8-4169-80e1-8f0b6d415ef3",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "DebugConstructionSpawn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1d36eff8-2174-4a7b-ad29-32b0c352366b",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "CancelPlacement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f203f3d-9197-414b-a1fa-a51cbb15f0d3",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

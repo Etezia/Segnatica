@@ -315,6 +315,74 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""BuildingSystem"",
+            ""id"": ""20b82edf-aa3f-462e-94e3-4d8c97156488"",
+            ""actions"": [
+                {
+                    ""name"": ""DebugConstructionSpawn"",
+                    ""type"": ""Button"",
+                    ""id"": ""c13e2a3b-4749-4b2a-bdf0-dea2de12b253"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CancelPlacement"",
+                    ""type"": ""Button"",
+                    ""id"": ""aa935a5b-8f72-46f6-8c0c-02fd0426576f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rotate"",
+                    ""type"": ""Value"",
+                    ""id"": ""44f47b24-b864-4f77-8c81-036e69f5e2e5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c92a06ad-9ad8-4169-80e1-8f0b6d415ef3"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""DebugConstructionSpawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d36eff8-2174-4a7b-ad29-32b0c352366b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""CancelPlacement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f203f3d-9197-414b-a1fa-a51cbb15f0d3"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -394,6 +462,11 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
         m_UI_OpenInventory = m_UI.FindAction("OpenInventory", throwIfNotFound: true);
+        // BuildingSystem
+        m_BuildingSystem = asset.FindActionMap("BuildingSystem", throwIfNotFound: true);
+        m_BuildingSystem_DebugConstructionSpawn = m_BuildingSystem.FindAction("DebugConstructionSpawn", throwIfNotFound: true);
+        m_BuildingSystem_CancelPlacement = m_BuildingSystem.FindAction("CancelPlacement", throwIfNotFound: true);
+        m_BuildingSystem_Rotate = m_BuildingSystem.FindAction("Rotate", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -401,6 +474,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_PlayerCamera.enabled, "This will cause a leak and performance issues, InputSystem_Actions.PlayerCamera.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputSystem_Actions.UI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_BuildingSystem.enabled, "This will cause a leak and performance issues, InputSystem_Actions.BuildingSystem.Disable() has not been called.");
     }
 
     /// <summary>
@@ -815,6 +889,124 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="UIActions" /> instance referencing this action map.
     /// </summary>
     public UIActions @UI => new UIActions(this);
+
+    // BuildingSystem
+    private readonly InputActionMap m_BuildingSystem;
+    private List<IBuildingSystemActions> m_BuildingSystemActionsCallbackInterfaces = new List<IBuildingSystemActions>();
+    private readonly InputAction m_BuildingSystem_DebugConstructionSpawn;
+    private readonly InputAction m_BuildingSystem_CancelPlacement;
+    private readonly InputAction m_BuildingSystem_Rotate;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "BuildingSystem".
+    /// </summary>
+    public struct BuildingSystemActions
+    {
+        private @InputSystem_Actions m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public BuildingSystemActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "BuildingSystem/DebugConstructionSpawn".
+        /// </summary>
+        public InputAction @DebugConstructionSpawn => m_Wrapper.m_BuildingSystem_DebugConstructionSpawn;
+        /// <summary>
+        /// Provides access to the underlying input action "BuildingSystem/CancelPlacement".
+        /// </summary>
+        public InputAction @CancelPlacement => m_Wrapper.m_BuildingSystem_CancelPlacement;
+        /// <summary>
+        /// Provides access to the underlying input action "BuildingSystem/Rotate".
+        /// </summary>
+        public InputAction @Rotate => m_Wrapper.m_BuildingSystem_Rotate;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_BuildingSystem; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="BuildingSystemActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(BuildingSystemActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="BuildingSystemActions" />
+        public void AddCallbacks(IBuildingSystemActions instance)
+        {
+            if (instance == null || m_Wrapper.m_BuildingSystemActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_BuildingSystemActionsCallbackInterfaces.Add(instance);
+            @DebugConstructionSpawn.started += instance.OnDebugConstructionSpawn;
+            @DebugConstructionSpawn.performed += instance.OnDebugConstructionSpawn;
+            @DebugConstructionSpawn.canceled += instance.OnDebugConstructionSpawn;
+            @CancelPlacement.started += instance.OnCancelPlacement;
+            @CancelPlacement.performed += instance.OnCancelPlacement;
+            @CancelPlacement.canceled += instance.OnCancelPlacement;
+            @Rotate.started += instance.OnRotate;
+            @Rotate.performed += instance.OnRotate;
+            @Rotate.canceled += instance.OnRotate;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="BuildingSystemActions" />
+        private void UnregisterCallbacks(IBuildingSystemActions instance)
+        {
+            @DebugConstructionSpawn.started -= instance.OnDebugConstructionSpawn;
+            @DebugConstructionSpawn.performed -= instance.OnDebugConstructionSpawn;
+            @DebugConstructionSpawn.canceled -= instance.OnDebugConstructionSpawn;
+            @CancelPlacement.started -= instance.OnCancelPlacement;
+            @CancelPlacement.performed -= instance.OnCancelPlacement;
+            @CancelPlacement.canceled -= instance.OnCancelPlacement;
+            @Rotate.started -= instance.OnRotate;
+            @Rotate.performed -= instance.OnRotate;
+            @Rotate.canceled -= instance.OnRotate;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="BuildingSystemActions.UnregisterCallbacks(IBuildingSystemActions)" />.
+        /// </summary>
+        /// <seealso cref="BuildingSystemActions.UnregisterCallbacks(IBuildingSystemActions)" />
+        public void RemoveCallbacks(IBuildingSystemActions instance)
+        {
+            if (m_Wrapper.m_BuildingSystemActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="BuildingSystemActions.AddCallbacks(IBuildingSystemActions)" />
+        /// <seealso cref="BuildingSystemActions.RemoveCallbacks(IBuildingSystemActions)" />
+        /// <seealso cref="BuildingSystemActions.UnregisterCallbacks(IBuildingSystemActions)" />
+        public void SetCallbacks(IBuildingSystemActions instance)
+        {
+            foreach (var item in m_Wrapper.m_BuildingSystemActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_BuildingSystemActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="BuildingSystemActions" /> instance referencing this action map.
+    /// </summary>
+    public BuildingSystemActions @BuildingSystem => new BuildingSystemActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -959,5 +1151,34 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnOpenInventory(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "BuildingSystem" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="BuildingSystemActions.AddCallbacks(IBuildingSystemActions)" />
+    /// <seealso cref="BuildingSystemActions.RemoveCallbacks(IBuildingSystemActions)" />
+    public interface IBuildingSystemActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "DebugConstructionSpawn" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDebugConstructionSpawn(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "CancelPlacement" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCancelPlacement(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Rotate" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRotate(InputAction.CallbackContext context);
     }
 }
