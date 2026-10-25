@@ -1020,7 +1020,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8061858203805493826, guid: 7f2736bbc4f6bb64aab628fa691c2aae, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 199.65587
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8061858203805493826, guid: 7f2736bbc4f6bb64aab628fa691c2aae, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1040,11 +1040,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8061858203805493826, guid: 7f2736bbc4f6bb64aab628fa691c2aae, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -773.28076
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8061858203805493826, guid: 7f2736bbc4f6bb64aab628fa691c2aae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -343.61255
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8061858203805493826, guid: 7f2736bbc4f6bb64aab628fa691c2aae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1395,7 +1395,7 @@ PrefabInstance:
     - target: {fileID: 833192020467432079, guid: 6a27e0a745613744c9627bcd18b8bf51, type: 3}
       propertyPath: hydrationBar
       value: 
-      objectReference: {fileID: 1807158391}
+      objectReference: {fileID: 1031304970}
     - target: {fileID: 833192020467432079, guid: 6a27e0a745613744c9627bcd18b8bf51, type: 3}
       propertyPath: playerNeedsSystem
       value: 
