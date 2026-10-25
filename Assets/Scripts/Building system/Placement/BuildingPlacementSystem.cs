@@ -15,6 +15,7 @@ public class BuildingPlacementSystem : MonoBehaviour
 
 	private ConstructionInfo currConstructionInfo;
 	private ConstructionPlacementHandler currConstruction;
+	private BracingPointsHolder currBracingPointsHolder;
 
 	[SerializeField] private InputActionAsset inputSystem;
 	private InputAction cancelPlacementAction;
@@ -55,27 +56,21 @@ public class BuildingPlacementSystem : MonoBehaviour
 			var mouseScrollDelta = rotateAction.ReadValue<Vector2>();
 			constructionHolderPoint.Rotate(currConstruction.transform.up, mouseScrollDelta.y * rotationSpeed);
 
-			if (playerCameraTransform.hasChanged)
+			if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out var hitInfo, maxPlacementDistance, includeLayers))
 			{
-				if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out var hitInfo, maxPlacementDistance, includeLayers))
-				{
-					currConstruction.gameObject.SetActive(true);
+				currConstruction.gameObject.SetActive(true);
 
-					if ((1 << hitInfo.collider.gameObject.layer & bracingDetectorsLayer) != 0)
-					{
-						var bracingPontsHolder = hitInfo.collider.gameObject.GetComponent<BracingPointsHolder>();
+				if ((1 << hitInfo.collider.gameObject.layer & bracingDetectorsLayer) != 0)
+				{
+					if (!currBracingPointsHolder || currBracingPointsHolder.gameObject != hitInfo.collider.gameObject)
+						currBracingPointsHolder = hitInfo.collider.gameObject.GetComponent<BracingPointsHolder>();
 						
-						if (bracingPontsHolder.BracingPointsDict.ContainsKey(currConstructionInfo.Type))
-						{
-							var bracePointTransform = bracingPontsHolder.BracingPointsDict[currConstructionInfo.Type];
-							constructionHolderPoint.position = bracePointTransform.position;
-							constructionHolderPoint.rotation = bracePointTransform.rotation *
-								Quaternion.Euler(new Vector3(0f, constructionHolderPoint.transform.rotation.y - constructionHolderPoint.transform.rotation.y % 90f, 0f));
-						}
-						else
-						{
-							constructionHolderPoint.position = hitInfo.point;
-						}
+					if (currBracingPointsHolder.BracingPointsDict.ContainsKey(currConstructionInfo.Type))
+					{
+						var bracePointTransform = currBracingPointsHolder.BracingPointsDict[currConstructionInfo.Type];
+						constructionHolderPoint.position = bracePointTransform.position;
+						constructionHolderPoint.rotation = bracePointTransform.rotation *
+							Quaternion.Euler(new Vector3(0f, constructionHolderPoint.transform.rotation.y - constructionHolderPoint.transform.rotation.y % 90f, 0f));
 					}
 					else
 					{
@@ -84,11 +79,15 @@ public class BuildingPlacementSystem : MonoBehaviour
 				}
 				else
 				{
-					currConstruction.gameObject.SetActive(false);
+					constructionHolderPoint.position = hitInfo.point;
 				}
-
-				playerCameraTransform.hasChanged = false;
 			}
+			else
+			{
+				currConstruction.gameObject.SetActive(false);
+			}
+
+			playerCameraTransform.hasChanged = false;
 		}
 	}
 
