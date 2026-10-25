@@ -18,5 +18,5 @@ MonoBehaviour:
   <SideSpeedCoeff>k__BackingField: 0.8
   <BackwardsSpeedCoeff>k__BackingField: 0.6
   <InAirControlCoeff>k__BackingField: 0.002
-  <JumpForce>k__BackingField: 8
+  <JumpForce>k__BackingField: 16
   <SlopeSlidingCoeff>k__BackingField: 0.8

@@ -86,8 +86,6 @@ public class BuildingPlacementSystem : MonoBehaviour
 			{
 				currConstruction.gameObject.SetActive(false);
 			}
-
-			playerCameraTransform.hasChanged = false;
 		}
 	}
 

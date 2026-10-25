@@ -6,8 +6,10 @@ using UnityEngine;
 public class ConstructionPlacementHandler : MonoBehaviour
 {
     [SerializeField] private PlacementData placementData;
+	[SerializeField] private Vector3 overlapScaleVector = new Vector3(0.48f, 0.5f, 0.48f);
 
-    private MeshRenderer renderer;
+
+	private MeshRenderer renderer;
 	private BoxCollider collider;
 
 	private Collider[] forbiddenColliders;
@@ -27,8 +29,9 @@ public class ConstructionPlacementHandler : MonoBehaviour
 	{
 		if (transform.hasChanged)
 		{
-			var overlappedColliders = Physics.OverlapBoxNonAlloc(transform.position + collider.center, Vector3.Scale(transform.lossyScale, collider.size) * 0.48f,
-			forbiddenColliders, transform.rotation, ~placementData.AllowedPlacementLayers, QueryTriggerInteraction.Ignore);
+			var overlappedColliders = 
+				Physics.OverlapBoxNonAlloc(transform.position + collider.center, Vector3.Scale(Vector3.Scale(transform.lossyScale, collider.size), overlapScaleVector),
+				forbiddenColliders, transform.rotation, ~placementData.AllowedPlacementLayers, QueryTriggerInteraction.Ignore);
 
 			if (overlappedColliders != 0)
 			{
