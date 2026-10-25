@@ -235,9 +235,27 @@
             "id": "20b82edf-aa3f-462e-94e3-4d8c97156488",
             "actions": [
                 {
-                    "name": "DebugConstructionSpawn",
+                    "name": "DebugFoundationSpawn",
                     "type": "Button",
                     "id": "c13e2a3b-4749-4b2a-bdf0-dea2de12b253",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DebugWallSpawn",
+                    "type": "Button",
+                    "id": "c828c9b9-5e0c-4a8c-b024-5622d8290028",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DebugFloorSpawn",
+                    "type": "Button",
+                    "id": "ca258ccc-5834-489b-a4fe-2650394b9500",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -279,7 +297,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "DebugConstructionSpawn",
+                    "action": "DebugFoundationSpawn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fc02ae82-4409-43ac-89db-ac6870ad9d50",
+                    "path": "<Keyboard>/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "DebugWallSpawn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a8e59f04-583b-4fa6-bd83-06031aba91f3",
+                    "path": "<Keyboard>/u",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "DebugFloorSpawn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

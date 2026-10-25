@@ -321,9 +321,27 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             ""id"": ""20b82edf-aa3f-462e-94e3-4d8c97156488"",
             ""actions"": [
                 {
-                    ""name"": ""DebugConstructionSpawn"",
+                    ""name"": ""DebugFoundationSpawn"",
                     ""type"": ""Button"",
                     ""id"": ""c13e2a3b-4749-4b2a-bdf0-dea2de12b253"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DebugWallSpawn"",
+                    ""type"": ""Button"",
+                    ""id"": ""c828c9b9-5e0c-4a8c-b024-5622d8290028"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DebugFloorSpawn"",
+                    ""type"": ""Button"",
+                    ""id"": ""ca258ccc-5834-489b-a4fe-2650394b9500"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -365,7 +383,29 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""DebugConstructionSpawn"",
+                    ""action"": ""DebugFoundationSpawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc02ae82-4409-43ac-89db-ac6870ad9d50"",
+                    ""path"": ""<Keyboard>/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""DebugWallSpawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a8e59f04-583b-4fa6-bd83-06031aba91f3"",
+                    ""path"": ""<Keyboard>/u"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""DebugFloorSpawn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -484,7 +524,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_UI_OpenInventory = m_UI.FindAction("OpenInventory", throwIfNotFound: true);
         // BuildingSystem
         m_BuildingSystem = asset.FindActionMap("BuildingSystem", throwIfNotFound: true);
-        m_BuildingSystem_DebugConstructionSpawn = m_BuildingSystem.FindAction("DebugConstructionSpawn", throwIfNotFound: true);
+        m_BuildingSystem_DebugFoundationSpawn = m_BuildingSystem.FindAction("DebugFoundationSpawn", throwIfNotFound: true);
+        m_BuildingSystem_DebugWallSpawn = m_BuildingSystem.FindAction("DebugWallSpawn", throwIfNotFound: true);
+        m_BuildingSystem_DebugFloorSpawn = m_BuildingSystem.FindAction("DebugFloorSpawn", throwIfNotFound: true);
         m_BuildingSystem_CancelPlacement = m_BuildingSystem.FindAction("CancelPlacement", throwIfNotFound: true);
         m_BuildingSystem_Rotate = m_BuildingSystem.FindAction("Rotate", throwIfNotFound: true);
         m_BuildingSystem_MountConstruction = m_BuildingSystem.FindAction("MountConstruction", throwIfNotFound: true);
@@ -914,7 +956,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     // BuildingSystem
     private readonly InputActionMap m_BuildingSystem;
     private List<IBuildingSystemActions> m_BuildingSystemActionsCallbackInterfaces = new List<IBuildingSystemActions>();
-    private readonly InputAction m_BuildingSystem_DebugConstructionSpawn;
+    private readonly InputAction m_BuildingSystem_DebugFoundationSpawn;
+    private readonly InputAction m_BuildingSystem_DebugWallSpawn;
+    private readonly InputAction m_BuildingSystem_DebugFloorSpawn;
     private readonly InputAction m_BuildingSystem_CancelPlacement;
     private readonly InputAction m_BuildingSystem_Rotate;
     private readonly InputAction m_BuildingSystem_MountConstruction;
@@ -930,9 +974,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// </summary>
         public BuildingSystemActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "BuildingSystem/DebugConstructionSpawn".
+        /// Provides access to the underlying input action "BuildingSystem/DebugFoundationSpawn".
         /// </summary>
-        public InputAction @DebugConstructionSpawn => m_Wrapper.m_BuildingSystem_DebugConstructionSpawn;
+        public InputAction @DebugFoundationSpawn => m_Wrapper.m_BuildingSystem_DebugFoundationSpawn;
+        /// <summary>
+        /// Provides access to the underlying input action "BuildingSystem/DebugWallSpawn".
+        /// </summary>
+        public InputAction @DebugWallSpawn => m_Wrapper.m_BuildingSystem_DebugWallSpawn;
+        /// <summary>
+        /// Provides access to the underlying input action "BuildingSystem/DebugFloorSpawn".
+        /// </summary>
+        public InputAction @DebugFloorSpawn => m_Wrapper.m_BuildingSystem_DebugFloorSpawn;
         /// <summary>
         /// Provides access to the underlying input action "BuildingSystem/CancelPlacement".
         /// </summary>
@@ -971,9 +1023,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_BuildingSystemActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_BuildingSystemActionsCallbackInterfaces.Add(instance);
-            @DebugConstructionSpawn.started += instance.OnDebugConstructionSpawn;
-            @DebugConstructionSpawn.performed += instance.OnDebugConstructionSpawn;
-            @DebugConstructionSpawn.canceled += instance.OnDebugConstructionSpawn;
+            @DebugFoundationSpawn.started += instance.OnDebugFoundationSpawn;
+            @DebugFoundationSpawn.performed += instance.OnDebugFoundationSpawn;
+            @DebugFoundationSpawn.canceled += instance.OnDebugFoundationSpawn;
+            @DebugWallSpawn.started += instance.OnDebugWallSpawn;
+            @DebugWallSpawn.performed += instance.OnDebugWallSpawn;
+            @DebugWallSpawn.canceled += instance.OnDebugWallSpawn;
+            @DebugFloorSpawn.started += instance.OnDebugFloorSpawn;
+            @DebugFloorSpawn.performed += instance.OnDebugFloorSpawn;
+            @DebugFloorSpawn.canceled += instance.OnDebugFloorSpawn;
             @CancelPlacement.started += instance.OnCancelPlacement;
             @CancelPlacement.performed += instance.OnCancelPlacement;
             @CancelPlacement.canceled += instance.OnCancelPlacement;
@@ -994,9 +1052,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="BuildingSystemActions" />
         private void UnregisterCallbacks(IBuildingSystemActions instance)
         {
-            @DebugConstructionSpawn.started -= instance.OnDebugConstructionSpawn;
-            @DebugConstructionSpawn.performed -= instance.OnDebugConstructionSpawn;
-            @DebugConstructionSpawn.canceled -= instance.OnDebugConstructionSpawn;
+            @DebugFoundationSpawn.started -= instance.OnDebugFoundationSpawn;
+            @DebugFoundationSpawn.performed -= instance.OnDebugFoundationSpawn;
+            @DebugFoundationSpawn.canceled -= instance.OnDebugFoundationSpawn;
+            @DebugWallSpawn.started -= instance.OnDebugWallSpawn;
+            @DebugWallSpawn.performed -= instance.OnDebugWallSpawn;
+            @DebugWallSpawn.canceled -= instance.OnDebugWallSpawn;
+            @DebugFloorSpawn.started -= instance.OnDebugFloorSpawn;
+            @DebugFloorSpawn.performed -= instance.OnDebugFloorSpawn;
+            @DebugFloorSpawn.canceled -= instance.OnDebugFloorSpawn;
             @CancelPlacement.started -= instance.OnCancelPlacement;
             @CancelPlacement.performed -= instance.OnCancelPlacement;
             @CancelPlacement.canceled -= instance.OnCancelPlacement;
@@ -1192,12 +1256,26 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     public interface IBuildingSystemActions
     {
         /// <summary>
-        /// Method invoked when associated input action "DebugConstructionSpawn" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "DebugFoundationSpawn" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnDebugConstructionSpawn(InputAction.CallbackContext context);
+        void OnDebugFoundationSpawn(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DebugWallSpawn" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDebugWallSpawn(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DebugFloorSpawn" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDebugFloorSpawn(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "CancelPlacement" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

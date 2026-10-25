@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: WoodConstructions
   m_EditorClassIdentifier: Assembly-CSharp::ConstructionsAsset
   <Foundation>k__BackingField: {fileID: 11400000, guid: d99ceed53aae8c745b5ad4449a8ec461, type: 2}
-  <Floor>k__BackingField: {fileID: 0}
-  <Wall>k__BackingField: {fileID: 0}
+  <Floor>k__BackingField: {fileID: 11400000, guid: ed67329e89f3a7e46968f056e9ede669, type: 2}
+  <Wall>k__BackingField: {fileID: 11400000, guid: 56e779b034a0176469162a66e6e79726, type: 2}
   <Door>k__BackingField: {fileID: 0}
   <Window>k__BackingField: {fileID: 0}
   <Column>k__BackingField: {fileID: 0}

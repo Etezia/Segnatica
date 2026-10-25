@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6410007897088802641}
   - component: {fileID: -6918714231713818097}
   m_Layer: 10
-  m_Name: Wood foundation
+  m_Name: Wooden foundation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,6 +144,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Construction
   constructionName: Wooden foundation
+--- !u!1 &1768653402622568189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3310592401895002103}
+  m_Layer: 0
+  m_Name: Vertical partition bracing point
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3310592401895002103
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768653402622568189}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0.44465888, y: 0.4780952, z: 0}
+  m_LocalScale: {x: 0.32894728, y: 1.9047619, z: 2.1377807}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8911465467462025275}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2994973465766774348
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 166772084696683197}
   m_Layer: 10
-  m_Name: Foundation braacing point
+  m_Name: Foundation bracing point
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -168,13 +199,44 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2994973465766774348}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -4.7202196, y: 0, z: 0}
   m_LocalScale: {x: 8.551124, y: 0.95238096, z: 1.3157896}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5290988735931871792}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &4132031096495092970
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7235294123923679066}
+  m_Layer: 0
+  m_Name: Vertical partition bracing point
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7235294123923679066
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4132031096495092970}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.44465837, y: 0.4780952, z: 0}
+  m_LocalScale: {x: 0.32894728, y: 1.9047619, z: 2.1377804}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 696619009930490120}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &5708672441219026493
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8574127100084731332}
   m_Layer: 10
-  m_Name: Foundation braacing point
+  m_Name: Foundation bracing point
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -199,13 +261,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5708672441219026493}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 4.72022, y: 0, z: 0}
   m_LocalScale: {x: 8.551124, y: 0.95238096, z: 1.3157896}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1025922143721609470}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &6351658042001607314
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,6 +299,7 @@ Transform:
   m_LocalScale: {x: 0.116943695, y: 1.05, z: 0.76}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3310592401895002103}
   - {fileID: 8547042386531672783}
   m_Father: {fileID: 7332601670237373814}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -274,7 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BracingPointsHolder
   FoundationBracingPoint: {fileID: 8547042386531672783}
-  VerticalPartitionBracingPoint: {fileID: 0}
+  VerticalPartitionBracingPoint: {fileID: 3310592401895002103}
   HorizontalPartitionBracingPoint: {fileID: 0}
 --- !u!1 &7097510461378321360
 GameObject:
@@ -307,6 +370,7 @@ Transform:
   m_LocalScale: {x: 0.116943695, y: 1.05, z: 0.76}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 374073441904077366}
   - {fileID: 166772084696683197}
   m_Father: {fileID: 7332601670237373814}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -344,8 +408,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BracingPointsHolder
   FoundationBracingPoint: {fileID: 166772084696683197}
-  VerticalPartitionBracingPoint: {fileID: 0}
+  VerticalPartitionBracingPoint: {fileID: 374073441904077366}
   HorizontalPartitionBracingPoint: {fileID: 0}
+--- !u!1 &7257688341359503381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2271758453004782708}
+  m_Layer: 0
+  m_Name: Vertical partition bracing point
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2271758453004782708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7257688341359503381}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.4446583, y: 0.4780952, z: 0}
+  m_LocalScale: {x: 0.32894737, y: 1.9047619, z: 2.137781}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1025922143721609470}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &7457301548521056323
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,7 +451,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5830974973975954083}
   m_Layer: 10
-  m_Name: Foundation braacing point
+  m_Name: Foundation bracing point
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -370,13 +465,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7457301548521056323}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 4.7202206, y: 0, z: 0}
   m_LocalScale: {x: 1.3157891, y: 0.95238096, z: 8.551122}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 696619009930490120}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &7529251714156990544
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,6 +503,7 @@ Transform:
   m_LocalScale: {x: 0.116943695, y: 1.05, z: 0.76}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7235294123923679066}
   - {fileID: 5830974973975954083}
   m_Father: {fileID: 7332601670237373814}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -445,7 +541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BracingPointsHolder
   FoundationBracingPoint: {fileID: 5830974973975954083}
-  VerticalPartitionBracingPoint: {fileID: 0}
+  VerticalPartitionBracingPoint: {fileID: 7235294123923679066}
   HorizontalPartitionBracingPoint: {fileID: 0}
 --- !u!1 &7610800932233018489
 GameObject:
@@ -457,7 +553,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8547042386531672783}
   m_Layer: 10
-  m_Name: Foundation braacing point
+  m_Name: Foundation bracing point
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -509,6 +605,7 @@ Transform:
   m_LocalScale: {x: 0.116943695, y: 1.05, z: 0.76}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2271758453004782708}
   - {fileID: 8574127100084731332}
   m_Father: {fileID: 7332601670237373814}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -546,5 +643,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BracingPointsHolder
   FoundationBracingPoint: {fileID: 8574127100084731332}
-  VerticalPartitionBracingPoint: {fileID: 0}
+  VerticalPartitionBracingPoint: {fileID: 2271758453004782708}
   HorizontalPartitionBracingPoint: {fileID: 0}
+--- !u!1 &8614287085092521956
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 374073441904077366}
+  m_Layer: 0
+  m_Name: Vertical partition bracing point
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &374073441904077366
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8614287085092521956}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0.4446578, y: 0.4780952, z: 0}
+  m_LocalScale: {x: 0.32894737, y: 1.9047619, z: 2.137781}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5290988735931871792}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}

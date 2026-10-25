@@ -13,11 +13,13 @@ public class BracingPointsHolder : MonoBehaviour
 
 	private void Awake()
 	{
-		BracingPointsDict = new Dictionary<ConstructionType, Transform>()
-		{
-			{ ConstructionType.Foundation, FoundationBracingPoint },
-			{ ConstructionType.VerticalPartition, HorizontalPartitionBracingPoint },
-			{ ConstructionType.HorizontalPartition, VerticalPartitionBracingPoint }
-		};
+		BracingPointsDict = new Dictionary<ConstructionType, Transform>();
+
+		if (FoundationBracingPoint)
+			BracingPointsDict.Add(ConstructionType.Foundation, FoundationBracingPoint);
+		if (VerticalPartitionBracingPoint)
+			BracingPointsDict.Add(ConstructionType.VerticalPartition, VerticalPartitionBracingPoint);
+		if (HorizontalPartitionBracingPoint)
+			BracingPointsDict.Add(ConstructionType.HorizontalPartition, HorizontalPartitionBracingPoint);
 	}
 }

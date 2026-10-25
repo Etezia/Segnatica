@@ -64,17 +64,23 @@ public class BuildingPlacementSystem : MonoBehaviour
 					if ((1 << hitInfo.collider.gameObject.layer & bracingDetectorsLayer) != 0)
 					{
 						var bracingPontsHolder = hitInfo.collider.gameObject.GetComponent<BracingPointsHolder>();
-						var bracePointTransform = bracingPontsHolder.BracingPointsDict[currConstructionInfo.Type];
-						constructionHolderPoint.position = bracePointTransform.position;
-						constructionHolderPoint.rotation = bracePointTransform.rotation * 
-							Quaternion.Euler(new Vector3(0f, constructionHolderPoint.transform.rotation.y - constructionHolderPoint.transform.rotation.y % 90f, 0f));
+						
+						if (bracingPontsHolder.BracingPointsDict.ContainsKey(currConstructionInfo.Type))
+						{
+							var bracePointTransform = bracingPontsHolder.BracingPointsDict[currConstructionInfo.Type];
+							constructionHolderPoint.position = bracePointTransform.position;
+							constructionHolderPoint.rotation = bracePointTransform.rotation *
+								Quaternion.Euler(new Vector3(0f, constructionHolderPoint.transform.rotation.y - constructionHolderPoint.transform.rotation.y % 90f, 0f));
+						}
+						else
+						{
+							constructionHolderPoint.position = hitInfo.point;
+						}
 					}
 					else
 					{
 						constructionHolderPoint.position = hitInfo.point;
 					}
-
-						
 				}
 				else
 				{
@@ -91,7 +97,8 @@ public class BuildingPlacementSystem : MonoBehaviour
 		Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out var hitInfo);
 
 		currConstruction = Instantiate(constructionInfo.PreviewObject, hitInfo.point, Quaternion.identity);
-		currConstruction.gameObject.SetActive(false);
+		if ((hitInfo.point - playerCameraTransform.position).magnitude > maxPlacementDistance)
+			currConstruction.gameObject.SetActive(false);
 
 		currConstruction.transform.SetParent(constructionHolderPoint);
 		currConstruction.transform.localPosition = Vector3.zero;

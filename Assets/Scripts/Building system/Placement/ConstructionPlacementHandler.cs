@@ -27,7 +27,7 @@ public class ConstructionPlacementHandler : MonoBehaviour
 	{
 		if (transform.hasChanged)
 		{
-			var overlappedColliders = Physics.OverlapBoxNonAlloc(transform.position + collider.center, Vector3.Scale(transform.lossyScale, collider.size) * 0.49f,
+			var overlappedColliders = Physics.OverlapBoxNonAlloc(transform.position + collider.center, Vector3.Scale(transform.lossyScale, collider.size) * 0.48f,
 			forbiddenColliders, transform.rotation, ~placementData.AllowedPlacementLayers, QueryTriggerInteraction.Ignore);
 
 			if (overlappedColliders != 0)

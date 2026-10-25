@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd2c041d53dfb7a4d936a8d6e48d8946, type: 3}
+  m_Name: WoodenFloorData
+  m_EditorClassIdentifier: Assembly-CSharp::ConstructionInfo
+  <Name>k__BackingField: Wooden floor
+  <Icon>k__BackingField: {fileID: 0}
+  <Type>k__BackingField: 2
+  <PreviewObject>k__BackingField: {fileID: 262604203903094491, guid: ddb7ad77832293c4e9a2e990098c8e17, type: 3}
+  <ConstructionObject>k__BackingField: {fileID: 2823081588520947468, guid: cd4eef90bb6f890418bae28d8ffb57f2, type: 3}
