@@ -346,6 +346,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MountConstruction"",
+                    ""type"": ""Button"",
+                    ""id"": ""f7fcbb24-14b2-4e70-9f89-7fe63841371a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -363,7 +372,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1d36eff8-2174-4a7b-ad29-32b0c352366b"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
@@ -379,6 +388,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0bea19ae-ff16-4145-8357-6f43e6576ac5"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""MountConstruction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -467,6 +487,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_BuildingSystem_DebugConstructionSpawn = m_BuildingSystem.FindAction("DebugConstructionSpawn", throwIfNotFound: true);
         m_BuildingSystem_CancelPlacement = m_BuildingSystem.FindAction("CancelPlacement", throwIfNotFound: true);
         m_BuildingSystem_Rotate = m_BuildingSystem.FindAction("Rotate", throwIfNotFound: true);
+        m_BuildingSystem_MountConstruction = m_BuildingSystem.FindAction("MountConstruction", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -896,6 +917,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_BuildingSystem_DebugConstructionSpawn;
     private readonly InputAction m_BuildingSystem_CancelPlacement;
     private readonly InputAction m_BuildingSystem_Rotate;
+    private readonly InputAction m_BuildingSystem_MountConstruction;
     /// <summary>
     /// Provides access to input actions defined in input action map "BuildingSystem".
     /// </summary>
@@ -919,6 +941,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "BuildingSystem/Rotate".
         /// </summary>
         public InputAction @Rotate => m_Wrapper.m_BuildingSystem_Rotate;
+        /// <summary>
+        /// Provides access to the underlying input action "BuildingSystem/MountConstruction".
+        /// </summary>
+        public InputAction @MountConstruction => m_Wrapper.m_BuildingSystem_MountConstruction;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -954,6 +980,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Rotate.started += instance.OnRotate;
             @Rotate.performed += instance.OnRotate;
             @Rotate.canceled += instance.OnRotate;
+            @MountConstruction.started += instance.OnMountConstruction;
+            @MountConstruction.performed += instance.OnMountConstruction;
+            @MountConstruction.canceled += instance.OnMountConstruction;
         }
 
         /// <summary>
@@ -974,6 +1003,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Rotate.started -= instance.OnRotate;
             @Rotate.performed -= instance.OnRotate;
             @Rotate.canceled -= instance.OnRotate;
+            @MountConstruction.started -= instance.OnMountConstruction;
+            @MountConstruction.performed -= instance.OnMountConstruction;
+            @MountConstruction.canceled -= instance.OnMountConstruction;
         }
 
         /// <summary>
@@ -1180,5 +1212,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRotate(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MountConstruction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMountConstruction(InputAction.CallbackContext context);
     }
 }

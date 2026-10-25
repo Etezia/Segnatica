@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "ConstructionsAsse", menuName = "Scriptable Objects/Constructions Asset")]
+[CreateAssetMenu(fileName = "ConstructionsAsset", menuName = "Scriptable Objects/Constructions Asset")]
 public class ConstructionsAsset : ScriptableObject
 {
 	[field: SerializeField] public ConstructionInfo Foundation { get; private set; }

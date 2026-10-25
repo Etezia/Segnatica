@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd2c041d53dfb7a4d936a8d6e48d8946, type: 3}
+  m_Name: WoodenFoundationData
+  m_EditorClassIdentifier: Assembly-CSharp::ConstructionInfo
+  <Name>k__BackingField: Wooden foundation
+  <Icon>k__BackingField: {fileID: 21300000, guid: 39f11f91e60815b4897d402ece3643c9, type: 3}
+  <Type>k__BackingField: 0
+  <PreviewObject>k__BackingField: {fileID: 262604203903094491, guid: 77858e78b9ccd7345809ec8d5d40c720, type: 3}
+  <ConstructionObject>k__BackingField: {fileID: -6918714231713818097, guid: 1b23e95f4a78c65428c60c786b0eebf2, type: 3}

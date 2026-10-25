@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82086f0f5eb3244488b79de2a1e0ef46, type: 3}
   m_Name: FoundationPlacementData
   m_EditorClassIdentifier: Assembly-CSharp::PlacementData
-  <ForbiddenPlacementLayers>k__BackingField:
+  <AllowedPlacementLayers>k__BackingField:
     serializedVersion: 2
-    m_Bits: 1535
+    m_Bits: 512
   <AllowedMountingMaterial>k__BackingField: {fileID: 2100000, guid: 78e17ca5a44a7b040a35acf9e0187bd8, type: 2}
   <ForbiddenMountingMaterial>k__BackingField: {fileID: 2100000, guid: abcf7adc53e6e1849b9cde323436452c, type: 2}

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7518739501568970069}
   - component: {fileID: 7860994594159259854}
   - component: {fileID: 5282103004709256491}
-  - component: {fileID: 4401323838054040922}
   - component: {fileID: 262604203903094491}
   m_Layer: 2
   m_Name: Foundation preview
@@ -108,25 +107,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4401323838054040922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1107270430065129674}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbc0f4a78e2c3e043a8c146de5212b1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EntityHealth
-  healthData: {fileID: 11400000, guid: 630b1c36b14019b4b8eed5c18cec81c7, type: 2}
 --- !u!114 &262604203903094491
 MonoBehaviour:
   m_ObjectHideFlags: 0

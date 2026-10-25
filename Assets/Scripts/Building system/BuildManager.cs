@@ -13,22 +13,28 @@ public class BuildManager : MonoBehaviour
 	private void Awake()
 	{
 		debugSpawnAction = inputSystem.FindAction("DebugConstructionSpawn");
+		buildingPlacementSystem.enabled = false;
 	}
 
 	private void OnEnable()
 	{
-		debugSpawnAction?.Enable();
+		buildingPlacementSystem.OnPlacementCancelling += DisablePlacementSystem;
 		debugSpawnAction.performed += SpawnConstruction;
 	}
 
 	private void OnDisable()
 	{
+		buildingPlacementSystem.OnPlacementCancelling -= DisablePlacementSystem;
 		debugSpawnAction.performed -= SpawnConstruction;
-		debugSpawnAction?.Disable();
 	}
 
 	private void SpawnConstruction(InputAction.CallbackContext context)
 	{
+		EnablePlacementSystem();
 		buildingPlacementSystem.SpawnConstruction(currConstructionAsset.Foundation);
 	}
+
+	private void EnablePlacementSystem() => buildingPlacementSystem.enabled = true;
+
+	private void DisablePlacementSystem() => buildingPlacementSystem.enabled = false;
 }

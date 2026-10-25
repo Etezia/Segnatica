@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class BuildingPlacementSystem : MonoBehaviour
 {
 	[SerializeField] private LayerMask includeLayers;
-	[SerializeField] private int ignoreRaycastLayer = 2;
+	[SerializeField] private LayerMask bracingDetectorsLayer;
 	[SerializeField] private int constructionLayer = 10;
 
 	[SerializeField] private Transform playerCameraTransform;
@@ -19,6 +19,7 @@ public class BuildingPlacementSystem : MonoBehaviour
 	[SerializeField] private InputActionAsset inputSystem;
 	private InputAction cancelPlacementAction;
 	private InputAction rotateAction;
+	private InputAction mountConstructionAction;
 
 	public event Action OnConstructionMounting;
 	public event Action OnPlacementCancelling;
@@ -27,34 +28,53 @@ public class BuildingPlacementSystem : MonoBehaviour
 	{
 		cancelPlacementAction = inputSystem.FindAction("CancelPlacement");
 		rotateAction = inputSystem.FindAction("Rotate");
+		mountConstructionAction = inputSystem.FindAction("MountConstruction");
 	}
 
 	private void OnEnable()
 	{
 		rotateAction?.Enable();
 		cancelPlacementAction?.Enable();
+		mountConstructionAction?.Enable();
 		cancelPlacementAction.performed += CancelPlacemnent;
+		mountConstructionAction.performed += TryMountConstruction;
 	}
 
 	private void OnDisable()
 	{
 		rotateAction?.Disable();
 		cancelPlacementAction.performed -= CancelPlacemnent;
+		mountConstructionAction.performed -= TryMountConstruction;
 		cancelPlacementAction?.Disable();
+		mountConstructionAction?.Disable();
 	}
 	private void Update()
 	{
 		if (currConstruction) 
 		{
 			var mouseScrollDelta = rotateAction.ReadValue<Vector2>();
-			currConstruction.transform.Rotate(currConstruction.transform.up, mouseScrollDelta.y * rotationSpeed);
+			constructionHolderPoint.Rotate(currConstruction.transform.up, mouseScrollDelta.y * rotationSpeed);
 
 			if (playerCameraTransform.hasChanged)
 			{
 				if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out var hitInfo, maxPlacementDistance, includeLayers))
 				{
 					currConstruction.gameObject.SetActive(true);
-					constructionHolderPoint.position = hitInfo.point;
+
+					if ((1 << hitInfo.collider.gameObject.layer & bracingDetectorsLayer) != 0)
+					{
+						var bracingPontsHolder = hitInfo.collider.gameObject.GetComponent<BracingPointsHolder>();
+						var bracePointTransform = bracingPontsHolder.BracingPointsDict[currConstructionInfo.Type];
+						constructionHolderPoint.position = bracePointTransform.position;
+						constructionHolderPoint.rotation = bracePointTransform.rotation * 
+							Quaternion.Euler(new Vector3(0f, constructionHolderPoint.transform.rotation.y - constructionHolderPoint.transform.rotation.y % 90f, 0f));
+					}
+					else
+					{
+						constructionHolderPoint.position = hitInfo.point;
+					}
+
+						
 				}
 				else
 				{
@@ -68,15 +88,29 @@ public class BuildingPlacementSystem : MonoBehaviour
 
 	public void SpawnConstruction(ConstructionInfo constructionInfo)
 	{
-		CancelPlacemnent(new InputAction.CallbackContext());
-		print("start spawn");
 		Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out var hitInfo);
 
 		currConstruction = Instantiate(constructionInfo.PreviewObject, hitInfo.point, Quaternion.identity);
 		currConstruction.gameObject.SetActive(false);
+
 		currConstruction.transform.SetParent(constructionHolderPoint);
 		currConstruction.transform.localPosition = Vector3.zero;
+		currConstruction.transform.localRotation = Quaternion.Euler(Vector3.zero);
 		currConstructionInfo = constructionInfo;
+	}
+
+	private void TryMountConstruction(InputAction.CallbackContext context)
+	{
+		if (currConstruction && currConstruction.CanBeMounted)
+		{
+			Destroy(currConstruction.gameObject);
+			currConstruction = null;
+
+			var mountedConstruction = Instantiate(currConstructionInfo.ConstructionObject, constructionHolderPoint.position, constructionHolderPoint.rotation);
+			currConstructionInfo = null;
+
+			OnConstructionMounting?.Invoke();
+		}
 	}
 
 	public void CancelPlacemnent(InputAction.CallbackContext context)

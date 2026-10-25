@@ -9534,8 +9534,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuildingPlacementSystem
   includeLayers:
     serializedVersion: 2
-    m_Bits: 1537
-  ignoreRaycastLayer: 2
+    m_Bits: 3585
+  bracingDetectorsLayer:
+    serializedVersion: 2
+    m_Bits: 2048
   constructionLayer: 10
   playerCameraTransform: {fileID: 8070097315855144009}
   constructionHolderPoint: {fileID: 1560929136}
