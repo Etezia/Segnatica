@@ -19,6 +19,7 @@ MonoBehaviour:
   <Type>k__BackingField: 0
   <IsStackable>k__BackingField: 0
   <IsEquipable>k__BackingField: 0
+  <IsUsable>k__BackingField: 1
   <MaxStackSize>k__BackingField: 0
   <PhysicalObject>k__BackingField: {fileID: 0}
   <HungerRecovery>k__BackingField: 0

@@ -13,7 +13,8 @@ public class InventoryCell : MonoBehaviour, IPointerClickHandler , IPointerEnter
     public int Index { get; set; }
 
     public event Action<int> RMBClicked;
-    public event Action<int> PointerEntered;
+	public event Action<int> LMBClicked;
+	public event Action<int> PointerEntered;
     public event Action<int> PointerExited;
 
 
@@ -21,6 +22,8 @@ public class InventoryCell : MonoBehaviour, IPointerClickHandler , IPointerEnter
     {
         if (eventData.button == PointerEventData.InputButton.Right)
 			RMBClicked?.Invoke(Index);
+        else if (eventData.button == PointerEventData.InputButton.Left) 
+            LMBClicked?.Invoke(Index);
 	}
 
     public void OnPointerEnter(PointerEventData eventData)

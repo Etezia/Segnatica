@@ -8,8 +8,11 @@ public class InventoryManager : MonoBehaviour
 	[SerializeField] private Transform hotbarTransform;
     [SerializeField] private InventoryCell inventoryCellPrefab;
 
+	[SerializeField] private NaturalNeedsSystem playerNeedsSystem;
+
 	[SerializeField] private int hotbarSize = 8;
 	[SerializeField] private int backpackSize = 35;
+
 	private int inventorySize => hotbarSize + backpackSize;
 
 	private List<SlotEntry> slotEntries;
@@ -47,6 +50,7 @@ public class InventoryManager : MonoBehaviour
 		foreach (var entry in slotEntries)
 		{
 			entry.Cell.RMBClicked += RemoveItemsFromSlot;
+			entry.Cell.LMBClicked += TryUseItem;
 			entry.Cell.PointerEntered += OnPointerEnteredCell;
 			entry.Cell.PointerExited += OnPointerExitedCell;
 		}
@@ -57,9 +61,18 @@ public class InventoryManager : MonoBehaviour
 		foreach (var entry in slotEntries)
 		{
 			entry.Cell.RMBClicked -= RemoveItemsFromSlot;
+			entry.Cell.LMBClicked -= TryUseItem;
 			entry.Cell.PointerEntered -= OnPointerEnteredCell;
 			entry.Cell.PointerExited -= OnPointerExitedCell;
 		}
+	}
+
+	private void Reset()
+	{
+		playerNeedsSystem = GameObject.FindWithTag("Player").GetComponent<NaturalNeedsSystem>();
+
+		hotbarSize = 8;
+		backpackSize = 35;
 	}
 
 	public int AddItemsIfPossible(ItemData item, int itemsCount)
@@ -126,7 +139,6 @@ public class InventoryManager : MonoBehaviour
 
 	public void RemoveItemsFromSlot(int index)
 	{
-		print("go remove");
 		var entry = slotEntries[index];
 		if (entry.Item == null)
 			return;
@@ -135,7 +147,6 @@ public class InventoryManager : MonoBehaviour
 
 		var itemInstance = Instantiate(entry.Item.PhysicalObject, PlayerSockets.Instance.ItemDropPoint.position, Quaternion.identity);
 		itemInstance.Count = entry.ItemsCount;
-		print("dropped");
 
 		entry.Item = null;
 		entry.ItemsCount = 0;
@@ -162,5 +173,33 @@ public class InventoryManager : MonoBehaviour
 	{
 		if (slotEntries[index].Item)
 			PointerExitedCell?.Invoke(slotEntries[index].Item);
+	}
+
+	private void TryUseItem(int index)
+	{
+		var item = slotEntries[index].Item;
+		if (item && item.IsUsable)
+		{
+			if (item is ConsumableItemData)
+			{
+				playerNeedsSystem.IncreaseSatiety((item as ConsumableItemData).HungerRecovery);
+				playerNeedsSystem.IncreaseHydration((item as ConsumableItemData).ThirstRecovery);
+			}
+
+			RefreshItemDataAfterUsing(slotEntries[index]);
+		}
+	}
+
+	private void RefreshItemDataAfterUsing(SlotEntry slotEntry)
+	{
+		slotEntry.ItemsCount--;
+
+		if (slotEntry.ItemsCount == 0)
+		{
+			slotEntry.Item = null;
+			ItemDropped?.Invoke(slotEntry);
+		}
+
+		SlotUpdated?.Invoke(slotEntry);
 	}
 }

@@ -19,8 +19,8 @@ public class InventoryView : MonoBehaviour
 
 	private void OnEnable()
 	{
-		inventoryManager.ItemAdded += ActivateCell;
-		inventoryManager.ItemDropped += DisableCell;
+		//inventoryManager.ItemAdded += ActivateCell;
+		//inventoryManager.ItemDropped += DisableCell;
 		inventoryManager.SlotUpdated += UpdateCell;
 
 		inventoryManager.PointerEnteredCell += ActivateAndUpdateDescriptionPanel;
@@ -29,8 +29,8 @@ public class InventoryView : MonoBehaviour
 
 	private void OnDisable()
 	{
-		inventoryManager.ItemAdded -= ActivateCell;
-		inventoryManager.ItemDropped -= DisableCell;
+		//inventoryManager.ItemAdded -= ActivateCell;
+		//inventoryManager.ItemDropped -= DisableCell;
 		inventoryManager.SlotUpdated -= UpdateCell;
 
 		inventoryManager.PointerEnteredCell -= ActivateAndUpdateDescriptionPanel;
@@ -56,11 +56,16 @@ public class InventoryView : MonoBehaviour
 		{
 			slotEntry.Cell.ItemsCountText.text = slotEntry.ItemsCount.ToString();
 			slotEntry.Cell.ItemIcon.sprite = slotEntry.Item.Icon;
+
+			if (!slotEntry.Cell.ItemIcon.gameObject.activeSelf)
+				ActivateCell(slotEntry);
 		}
 		else
 		{
 			slotEntry.Cell.ItemsCountText.text = "";
 			slotEntry.Cell.ItemIcon.sprite = null;
+
+			DisableCell(slotEntry);
 		}
 	}
 

@@ -20,5 +20,6 @@ MonoBehaviour:
   <Type>k__BackingField: 6
   <IsStackable>k__BackingField: 0
   <IsEquipable>k__BackingField: 1
-  <MaxStackSize>k__BackingField: 0
+  <IsUsable>k__BackingField: 0
+  <MaxStackSize>k__BackingField: 1
   <PhysicalObject>k__BackingField: {fileID: 5341539220500543, guid: a3a3f39285fe8b04d8d5c37487aea3be, type: 3}
