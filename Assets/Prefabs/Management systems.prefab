@@ -117,6 +117,7 @@ MonoBehaviour:
   backpackPanelTransform: {fileID: 0}
   hotbarTransform: {fileID: 0}
   inventoryCellPrefab: {fileID: 7004762856729169474, guid: 91d1f687425c30248a142d2dad6395a8, type: 3}
+  playerNeedsSystem: {fileID: 0}
   hotbarSize: 8
   backpackSize: 35
 --- !u!114 &7343846188260735321
@@ -131,6 +132,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c9329a6bce1abd4ba025d0d365621dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryView
+  descriptionPanel: {fileID: 0}
+  itemNameText: {fileID: 0}
+  itemDescriptionsText: {fileID: 0}
 --- !u!1 &4816413029420476320
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f0a1bad8a2f91c4fbc899b63fcaca78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuildManager
+  inventoryManager: {fileID: 1956579436730796740}
   buildingPlacementSystem: {fileID: 544095786014320991}
   currConstructionAsset: {fileID: 11400000, guid: 4c978492ff48dff4fbf9161f599d34aa, type: 2}
   inputSystem: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19d5f47a2a22acf48bdf136b811f56ba, type: 3}
   m_Name: WoodenPlank
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  <Id>k__BackingField: 4
+  <Id>k__BackingField: 2
   <Name>k__BackingField: Wooden plank
   <Icon>k__BackingField: {fileID: 21300000, guid: 64fc6cc98a9be614987f883d2e407268, type: 3}
   <Description>k__BackingField: Can be used for building or crafting simple wooden
@@ -21,5 +21,5 @@ MonoBehaviour:
   <IsStackable>k__BackingField: 1
   <IsEquipable>k__BackingField: 0
   <IsUsable>k__BackingField: 0
-  <MaxStackSize>k__BackingField: 100
+  <MaxStackSize>k__BackingField: 10
   <PhysicalObject>k__BackingField: {fileID: 2865083209648567734, guid: 37b1dd402bfca3c45a1c0362a42d127c, type: 3}

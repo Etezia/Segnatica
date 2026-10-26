@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(BuildingPlacementSystem))]
 public class BuildManager : MonoBehaviour
 {
+	[SerializeField] private InventoryManager inventoryManager;
 	[SerializeField] private BuildingPlacementSystem buildingPlacementSystem;
 	[SerializeField] private ConstructionsAsset currConstructionAsset;
 
@@ -39,8 +40,11 @@ public class BuildManager : MonoBehaviour
 
 	private void SpawnFoundation(InputAction.CallbackContext context)
 	{
-		ResetPlacementSystem();
-		buildingPlacementSystem.SpawnConstruction(currConstructionAsset.Foundation);
+		if (inventoryManager.TryRemoveItems(2, 9))
+		{
+			ResetPlacementSystem();
+			buildingPlacementSystem.SpawnConstruction(currConstructionAsset.Foundation);
+		}
 	}
 
 	private void SpawnWall (InputAction.CallbackContext context)

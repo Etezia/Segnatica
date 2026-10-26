@@ -14,6 +14,7 @@ public class InventoryManager : MonoBehaviour
 	[SerializeField] private int backpackSize = 35;
 
 	private int inventorySize => hotbarSize + backpackSize;
+	private int lastOccupiedSlotIndex = -1;
 
 	private List<SlotEntry> slotEntries;
 	private Dictionary<int, int> itemCountById;
@@ -43,13 +44,14 @@ public class InventoryManager : MonoBehaviour
 			cell.Index = i;
 		}
 		SlotsCount = backpackSize;
+		lastOccupiedSlotIndex = -1;
 	}
 
 	private void OnEnable()
 	{
 		foreach (var entry in slotEntries)
 		{
-			entry.Cell.RMBClicked += RemoveItemsFromSlot;
+			entry.Cell.RMBClicked += DropItemsFromSlot;
 			entry.Cell.LMBClicked += TryUseItem;
 			entry.Cell.PointerEntered += OnPointerEnteredCell;
 			entry.Cell.PointerExited += OnPointerExitedCell;
@@ -60,7 +62,7 @@ public class InventoryManager : MonoBehaviour
 	{
 		foreach (var entry in slotEntries)
 		{
-			entry.Cell.RMBClicked -= RemoveItemsFromSlot;
+			entry.Cell.RMBClicked -= DropItemsFromSlot;
 			entry.Cell.LMBClicked -= TryUseItem;
 			entry.Cell.PointerEntered -= OnPointerEnteredCell;
 			entry.Cell.PointerExited -= OnPointerExitedCell;
@@ -105,6 +107,7 @@ public class InventoryManager : MonoBehaviour
 				}
 
 				UsedSlotsCount++;
+				lastOccupiedSlotIndex = i;
 
 				SlotUpdated?.Invoke(currSlotEntry);
 				ItemAdded?.Invoke(currSlotEntry);
@@ -117,6 +120,7 @@ public class InventoryManager : MonoBehaviour
 					continue;
 
 				currSlotEntry.ItemsCount = Mathf.Clamp(initSlotItemsCount + itemsCount, 0, item.MaxStackSize);
+				itemCountById[item.Id] += currSlotEntry.ItemsCount - initSlotItemsCount;
 				itemsCount -= currSlotEntry.ItemsCount - initSlotItemsCount;
 
 				currCell.ItemsCountText.text = currSlotEntry.ItemsCount.ToString();
@@ -137,7 +141,7 @@ public class InventoryManager : MonoBehaviour
 		return itemsCount;
 	}
 
-	public void RemoveItemsFromSlot(int index)
+	private void DropItemsFromSlot(int index)
 	{
 		var entry = slotEntries[index];
 		if (entry.Item == null)
@@ -152,15 +156,47 @@ public class InventoryManager : MonoBehaviour
 		entry.ItemsCount = 0;
 
 		UsedSlotsCount--;
+		lastOccupiedSlotIndex = index - 1;
 
 		SlotUpdated?.Invoke(entry);
 		ItemDropped?.Invoke(entry);
 		InventoryChanged?.Invoke();
 	}
 
-	private void RemoveItems(int count)
+	public bool TryRemoveItems(int id, int count)
 	{
+		if (!itemCountById.ContainsKey(id) || itemCountById[id] < count)
+			return false;
+		else
+			itemCountById[id] -= count;
 
+			for (var i = lastOccupiedSlotIndex; i >= 0; i--)
+			{
+				var currEntry = slotEntries[i];
+				if (currEntry.Item && currEntry.Item.Id == id)
+				{
+					if (currEntry.ItemsCount <= count)
+					{
+						count -= currEntry.ItemsCount;
+						currEntry.ItemsCount = 0;
+						currEntry.Item = null;
+
+						SlotUpdated?.Invoke(currEntry);
+						InventoryChanged?.Invoke();
+						continue;
+					}
+					else
+					{
+						currEntry.ItemsCount -= count;
+
+						SlotUpdated?.Invoke(currEntry);
+						InventoryChanged?.Invoke();
+						break;
+					}
+				}
+			}
+
+		return true;
 	}
 
 	private void OnPointerEnteredCell(int index)
@@ -201,5 +237,6 @@ public class InventoryManager : MonoBehaviour
 		}
 
 		SlotUpdated?.Invoke(slotEntry);
+		InventoryChanged?.Invoke();
 	}
 }
