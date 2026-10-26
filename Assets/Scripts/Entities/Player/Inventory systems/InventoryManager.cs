@@ -19,11 +19,14 @@ public class InventoryManager : MonoBehaviour
 	public int UsedSlotsCount { get; private set; }
 	public bool IsFull { get; private set; } = false;
 
-	public event Action OnInventoryChange;
+	public event Action InventoryChanged;
 
-	public event Action<SlotEntry> OnAddItem;
-	public event Action<SlotEntry> OnDropItem;
-	public event Action<SlotEntry> OnUpdateSlot;
+	public event Action<SlotEntry> ItemAdded;
+	public event Action<SlotEntry> ItemDropped;
+	public event Action<SlotEntry> SlotUpdated;
+
+	public event Action<ItemData> PointerEnteredCell;
+	public event Action<ItemData> PointerExitedCell;
 
 	private void Awake()
 	{
@@ -42,13 +45,21 @@ public class InventoryManager : MonoBehaviour
 	private void OnEnable()
 	{
 		foreach (var entry in slotEntries)
-			entry.Cell.OnRMBClick += RemoveItemsFromSlot;
+		{
+			entry.Cell.RMBClicked += RemoveItemsFromSlot;
+			entry.Cell.PointerEntered += OnPointerEnteredCell;
+			entry.Cell.PointerExited += OnPointerExitedCell;
+		}
 	}
 
 	private void OnDisable()
 	{
 		foreach (var entry in slotEntries)
-			entry.Cell.OnRMBClick -= RemoveItemsFromSlot;
+		{
+			entry.Cell.RMBClicked -= RemoveItemsFromSlot;
+			entry.Cell.PointerEntered -= OnPointerEnteredCell;
+			entry.Cell.PointerExited -= OnPointerExitedCell;
+		}
 	}
 
 	public int AddItemsIfPossible(ItemData item, int itemsCount)
@@ -82,9 +93,9 @@ public class InventoryManager : MonoBehaviour
 
 				UsedSlotsCount++;
 
-				OnUpdateSlot?.Invoke(currSlotEntry);
-				OnAddItem?.Invoke(currSlotEntry);
-				OnInventoryChange?.Invoke();
+				SlotUpdated?.Invoke(currSlotEntry);
+				ItemAdded?.Invoke(currSlotEntry);
+				InventoryChanged?.Invoke();
 			}
 			else
 			{
@@ -97,7 +108,7 @@ public class InventoryManager : MonoBehaviour
 
 				currCell.ItemsCountText.text = currSlotEntry.ItemsCount.ToString();
 
-				OnUpdateSlot?.Invoke(currSlotEntry);
+				SlotUpdated?.Invoke(currSlotEntry);
 			}
 
 			if (i == SlotsCount - 1 && (!isStackable || isStackable && currSlotEntry.ItemsCount == item.MaxStackSize))
@@ -131,9 +142,9 @@ public class InventoryManager : MonoBehaviour
 
 		UsedSlotsCount--;
 
-		OnUpdateSlot?.Invoke(entry);
-		OnDropItem?.Invoke(entry);
-		OnInventoryChange?.Invoke();
+		SlotUpdated?.Invoke(entry);
+		ItemDropped?.Invoke(entry);
+		InventoryChanged?.Invoke();
 	}
 
 	private void RemoveItems(int count)
@@ -141,9 +152,15 @@ public class InventoryManager : MonoBehaviour
 
 	}
 
-	private void AddItemsToSlot(InventoryCell cell, ItemData item)
+	private void OnPointerEnteredCell(int index)
 	{
-		
+		if (slotEntries[index].Item)
+			PointerEnteredCell?.Invoke(slotEntries[index].Item);
+	}
+
+	private void OnPointerExitedCell(int index)
+	{
+		if (slotEntries[index].Item)
+			PointerExitedCell?.Invoke(slotEntries[index].Item);
 	}
 }
-//отделение вьюшки от модели предполагается к 3786му году. готовьтесь

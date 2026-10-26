@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 572171346461861022}
   - component: {fileID: 5279838817606794259}
   m_Layer: 11
-  m_Name: Bracing detector
+  m_Name: Attachment detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3.95, y: 0.16, z: 0.15}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7920339217852300996}
   m_Father: {fileID: 554814814308587758}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &572171346461861022
@@ -66,9 +67,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e675e24dcc519674ba7c470097ba14ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BracingPointsHolder
-  FoundationBracingPoint: {fileID: 0}
-  VerticalPartitionBracingPoint: {fileID: 7920339217852300996}
-  HorizontalPartitionBracingPoint: {fileID: 0}
+  FoundationAttachmentPoint: {fileID: 0}
+  VerticalPartitionAttachmentPoint: {fileID: 7920339217852300996}
+  HorizontalPartitionAttachmentPoint: {fileID: 0}
 --- !u!1 &417530416148265957
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,7 +80,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6325430272144713099}
   m_Layer: 11
-  m_Name: 'Left bracing detector group '
+  m_Name: 'Left attachment detector group '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,7 +112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 554814814308587758}
   m_Layer: 11
-  m_Name: 'Up bracing detector group '
+  m_Name: 'Up attachment detector group '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,7 +146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 264972528009463048}
   m_Layer: 11
-  m_Name: Horizontal partition bracing point
+  m_Name: Horizontal partition attachment point
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -176,7 +177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1698140679515058888}
   m_Layer: 11
-  m_Name: Horizontal partition bracing point
+  m_Name: Horizontal partition attachment point
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -207,7 +208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2102123314246653486}
   m_Layer: 11
-  m_Name: Vertical partition bracing point
+  m_Name: Vertical partition attachment point
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -238,7 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4651661135861249460}
   m_Layer: 11
-  m_Name: Down bracing detector group
+  m_Name: Down attachment detector group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -296,7 +297,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7920339217852300996}
   - {fileID: 4651661135861249460}
   - {fileID: 554814814308587758}
   - {fileID: 6325430272144713099}
@@ -419,7 +419,7 @@ GameObject:
   - component: {fileID: 5947266088702526577}
   - component: {fileID: 4854131600355345801}
   m_Layer: 11
-  m_Name: Bracing detector (2)
+  m_Name: Attachment detector (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -474,9 +474,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e675e24dcc519674ba7c470097ba14ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BracingPointsHolder
-  FoundationBracingPoint: {fileID: 0}
-  VerticalPartitionBracingPoint: {fileID: 0}
-  HorizontalPartitionBracingPoint: {fileID: 264972528009463048}
+  FoundationAttachmentPoint: {fileID: 0}
+  VerticalPartitionAttachmentPoint: {fileID: 0}
+  HorizontalPartitionAttachmentPoint: {fileID: 264972528009463048}
 --- !u!1 &3609337881250275366
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,7 +489,7 @@ GameObject:
   - component: {fileID: 2439749338137516230}
   - component: {fileID: 6299376380566490992}
   m_Layer: 11
-  m_Name: Bracing detector
+  m_Name: Attachment detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -544,9 +544,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e675e24dcc519674ba7c470097ba14ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BracingPointsHolder
-  FoundationBracingPoint: {fileID: 0}
-  VerticalPartitionBracingPoint: {fileID: 606755847175844360}
-  HorizontalPartitionBracingPoint: {fileID: 0}
+  FoundationAttachmentPoint: {fileID: 0}
+  VerticalPartitionAttachmentPoint: {fileID: 606755847175844360}
+  HorizontalPartitionAttachmentPoint: {fileID: 0}
 --- !u!1 &3664169602470094882
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,7 +557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 606755847175844360}
   m_Layer: 11
-  m_Name: Vertical partition bracing point
+  m_Name: Vertical partition attachment point
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -588,7 +588,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2302709789212098801}
   m_Layer: 11
-  m_Name: Horizontal partition bracing point
+  m_Name: Horizontal partition attachment point
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -619,7 +619,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7920339217852300996}
   m_Layer: 11
-  m_Name: Vertical partition bracing point
+  m_Name: Vertical partition attachment point
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -633,12 +633,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5413926224479345689}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: -1}
-  m_LocalPosition: {x: 0, y: 4.002, z: 0}
-  m_LocalScale: {x: 3.95, y: 0.16, z: 0.15}
+  m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
+  m_LocalPosition: {x: 0, y: -0.012499094, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6733673298358965255}
+  m_Father: {fileID: 1775817610104633575}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!1 &5674946973566662234
 GameObject:
@@ -650,7 +650,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9206084802709979096}
   m_Layer: 11
-  m_Name: Vertical partition bracing point
+  m_Name: Vertical partition attachment point
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -683,7 +683,7 @@ GameObject:
   - component: {fileID: 5197547454093402112}
   - component: {fileID: 6368949440665842913}
   m_Layer: 11
-  m_Name: Bracing detector (1)
+  m_Name: Attachment detector (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -738,9 +738,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e675e24dcc519674ba7c470097ba14ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BracingPointsHolder
-  FoundationBracingPoint: {fileID: 0}
-  VerticalPartitionBracingPoint: {fileID: 0}
-  HorizontalPartitionBracingPoint: {fileID: 5284585180842824590}
+  FoundationAttachmentPoint: {fileID: 0}
+  VerticalPartitionAttachmentPoint: {fileID: 0}
+  HorizontalPartitionAttachmentPoint: {fileID: 5284585180842824590}
 --- !u!1 &6448298507379531119
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,7 +751,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2270029360201091871}
   m_Layer: 11
-  m_Name: Right bracing detector group
+  m_Name: Right attachment detector group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -785,7 +785,7 @@ GameObject:
   - component: {fileID: 2717164368918237821}
   - component: {fileID: 4621171743971037748}
   m_Layer: 11
-  m_Name: Bracing detector
+  m_Name: Attachment detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -840,9 +840,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e675e24dcc519674ba7c470097ba14ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BracingPointsHolder
-  FoundationBracingPoint: {fileID: 0}
-  VerticalPartitionBracingPoint: {fileID: 2102123314246653486}
-  HorizontalPartitionBracingPoint: {fileID: 0}
+  FoundationAttachmentPoint: {fileID: 0}
+  VerticalPartitionAttachmentPoint: {fileID: 2102123314246653486}
+  HorizontalPartitionAttachmentPoint: {fileID: 0}
 --- !u!1 &7495102253944780778
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,7 +853,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5284585180842824590}
   m_Layer: 11
-  m_Name: Horizontal partition bracing point
+  m_Name: Horizontal partition attachment point
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -886,7 +886,7 @@ GameObject:
   - component: {fileID: 7789098203046580251}
   - component: {fileID: 2193885731273139632}
   m_Layer: 11
-  m_Name: Bracing detector (2)
+  m_Name: Attachment detector (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -941,9 +941,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e675e24dcc519674ba7c470097ba14ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BracingPointsHolder
-  FoundationBracingPoint: {fileID: 0}
-  VerticalPartitionBracingPoint: {fileID: 0}
-  HorizontalPartitionBracingPoint: {fileID: 2302709789212098801}
+  FoundationAttachmentPoint: {fileID: 0}
+  VerticalPartitionAttachmentPoint: {fileID: 0}
+  HorizontalPartitionAttachmentPoint: {fileID: 2302709789212098801}
 --- !u!1 &8332082188835391705
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,7 +956,7 @@ GameObject:
   - component: {fileID: 8520768023703955263}
   - component: {fileID: 7559388326373965381}
   m_Layer: 11
-  m_Name: Bracing detector (1)
+  m_Name: Attachment detector (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1011,9 +1011,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e675e24dcc519674ba7c470097ba14ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BracingPointsHolder
-  FoundationBracingPoint: {fileID: 0}
-  VerticalPartitionBracingPoint: {fileID: 0}
-  HorizontalPartitionBracingPoint: {fileID: 1698140679515058888}
+  FoundationAttachmentPoint: {fileID: 0}
+  VerticalPartitionAttachmentPoint: {fileID: 0}
+  HorizontalPartitionAttachmentPoint: {fileID: 1698140679515058888}
 --- !u!1 &8739747635926032884
 GameObject:
   m_ObjectHideFlags: 0
@@ -1026,7 +1026,7 @@ GameObject:
   - component: {fileID: 1856157339500578480}
   - component: {fileID: 8669780629344474017}
   m_Layer: 11
-  m_Name: Bracing detector
+  m_Name: Attachment detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1081,6 +1081,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e675e24dcc519674ba7c470097ba14ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BracingPointsHolder
-  FoundationBracingPoint: {fileID: 0}
-  VerticalPartitionBracingPoint: {fileID: 9206084802709979096}
-  HorizontalPartitionBracingPoint: {fileID: 0}
+  FoundationAttachmentPoint: {fileID: 0}
+  VerticalPartitionAttachmentPoint: {fileID: 9206084802709979096}
+  HorizontalPartitionAttachmentPoint: {fileID: 0}

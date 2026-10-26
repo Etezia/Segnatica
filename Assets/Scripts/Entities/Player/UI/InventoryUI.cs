@@ -12,12 +12,12 @@ public class InventoryUI : MonoBehaviour
 	{
 		RefreshFilledCellsCountText();
 
-		inventoryManager.OnInventoryChange += RefreshFilledCellsCountText;
+		inventoryManager.InventoryChanged += RefreshFilledCellsCountText;
 	}
 	
 	private void OnDisable()
 	{
-		inventoryManager.OnInventoryChange -= RefreshFilledCellsCountText;
+		inventoryManager.InventoryChanged -= RefreshFilledCellsCountText;
 	}
 
 	private void RefreshFilledCellsCountText() => 

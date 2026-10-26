@@ -15,7 +15,7 @@ public class BuildingPlacementSystem : MonoBehaviour
 
 	private ConstructionInfo currConstructionInfo;
 	private ConstructionPlacementHandler currConstruction;
-	private BracingPointsHolder currBracingPointsHolder;
+	private AttachmentPointsHolder currAttachmentPointsHolder;
 
 	[SerializeField] private InputActionAsset inputSystem;
 	private InputAction cancelPlacementAction;
@@ -62,14 +62,14 @@ public class BuildingPlacementSystem : MonoBehaviour
 
 				if ((1 << hitInfo.collider.gameObject.layer & bracingDetectorsLayer) != 0)
 				{
-					if (!currBracingPointsHolder || currBracingPointsHolder.gameObject != hitInfo.collider.gameObject)
-						currBracingPointsHolder = hitInfo.collider.gameObject.GetComponent<BracingPointsHolder>();
+					if (!currAttachmentPointsHolder || currAttachmentPointsHolder.gameObject != hitInfo.collider.gameObject)
+						currAttachmentPointsHolder = hitInfo.collider.gameObject.GetComponent<AttachmentPointsHolder>();
 						
-					if (currBracingPointsHolder.BracingPointsDict.ContainsKey(currConstructionInfo.Type))
+					if (currAttachmentPointsHolder.AttachmentPointsDict.ContainsKey(currConstructionInfo.Type))
 					{
-						var bracePointTransform = currBracingPointsHolder.BracingPointsDict[currConstructionInfo.Type];
-						constructionHolderPoint.position = bracePointTransform.position;
-						constructionHolderPoint.rotation = bracePointTransform.rotation *
+						var attachmentPointTransform = currAttachmentPointsHolder.AttachmentPointsDict[currConstructionInfo.Type];
+						constructionHolderPoint.position = attachmentPointTransform.position;
+						constructionHolderPoint.rotation = attachmentPointTransform.rotation *
 							Quaternion.Euler(new Vector3(0f, constructionHolderPoint.transform.rotation.y - constructionHolderPoint.transform.rotation.y % 90f, 0f));
 					}
 					else

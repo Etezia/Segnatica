@@ -1,11 +1,16 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
 
 [RequireComponent(typeof(InventoryManager))]
 public class InventoryView : MonoBehaviour
 {
-    private InventoryManager inventoryManager;
+	[SerializeField] private GameObject descriptionPanel;
+	[SerializeField] private TMP_Text itemNameText;
+	[SerializeField] private TMP_Text itemDescriptionsText;
+
+	private InventoryManager inventoryManager;
 
 	private void Awake()
 	{
@@ -14,16 +19,22 @@ public class InventoryView : MonoBehaviour
 
 	private void OnEnable()
 	{
-		inventoryManager.OnAddItem += ActivateCell;
-		inventoryManager.OnDropItem += DisableCell;
-		inventoryManager.OnUpdateSlot += UpdateCell;
+		inventoryManager.ItemAdded += ActivateCell;
+		inventoryManager.ItemDropped += DisableCell;
+		inventoryManager.SlotUpdated += UpdateCell;
+
+		inventoryManager.PointerEnteredCell += ActivateAndUpdateDescriptionPanel;
+		inventoryManager.PointerExitedCell += DisableDescriptionPanel;
 	}
 
 	private void OnDisable()
 	{
-		inventoryManager.OnAddItem -= ActivateCell;
-		inventoryManager.OnDropItem -= DisableCell;
-		inventoryManager.OnUpdateSlot -= UpdateCell;
+		inventoryManager.ItemAdded -= ActivateCell;
+		inventoryManager.ItemDropped -= DisableCell;
+		inventoryManager.SlotUpdated -= UpdateCell;
+
+		inventoryManager.PointerEnteredCell -= ActivateAndUpdateDescriptionPanel;
+		inventoryManager.PointerExitedCell -= DisableDescriptionPanel;
 	}
 
 	private void ActivateCell(SlotEntry slotEntry)
@@ -52,4 +63,13 @@ public class InventoryView : MonoBehaviour
 			slotEntry.Cell.ItemIcon.sprite = null;
 		}
 	}
+
+	private void ActivateAndUpdateDescriptionPanel(ItemData itemData)
+	{
+		itemNameText.text = itemData.Name;
+		itemDescriptionsText.text = itemData.Description;
+		descriptionPanel.SetActive(true);
+	}
+
+	private void DisableDescriptionPanel(ItemData itemData) => descriptionPanel.SetActive(false);
 }
