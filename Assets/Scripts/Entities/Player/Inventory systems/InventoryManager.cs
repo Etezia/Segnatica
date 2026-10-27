@@ -19,7 +19,6 @@ public class InventoryManager : MonoBehaviour
 	public List<SlotEntry> SlotEntries { get; private set; }
 	private Dictionary<int, int> itemCountById;
 
-	public int SlotsCount { get; private set; } = 0;
 	public int UsedSlotsCount { get; private set; }
 	public bool IsFull { get; private set; } = false;
 
@@ -43,7 +42,6 @@ public class InventoryManager : MonoBehaviour
 			SlotEntries.Add(new SlotEntry(cell));
 			cell.Index = i;
 		}
-		SlotsCount = BackpackSize;
 		lastOccupiedSlotIndex = -1;
 	}
 
@@ -106,7 +104,8 @@ public class InventoryManager : MonoBehaviour
 					itemsCount -= 1;
 				}
 
-				UsedSlotsCount++;
+				if (i >= HotbarSize)
+					UsedSlotsCount++;
 				lastOccupiedSlotIndex = i;
 
 				SlotUpdated?.Invoke(currSlotEntry);
@@ -128,7 +127,7 @@ public class InventoryManager : MonoBehaviour
 				SlotUpdated?.Invoke(currSlotEntry);
 			}
 
-			if (i == SlotsCount - 1 && (!isStackable || isStackable && currSlotEntry.ItemsCount == item.MaxStackSize))
+			if (i == BackpackSize - 1 && (!isStackable || isStackable && currSlotEntry.ItemsCount == item.MaxStackSize))
 			{
 				IsFull = true;
 				return itemsCount;
@@ -155,7 +154,8 @@ public class InventoryManager : MonoBehaviour
 		entry.Item = null;
 		entry.ItemsCount = 0;
 
-		UsedSlotsCount--;
+		if (entry.Cell.Index >= HotbarSize)
+			UsedSlotsCount--;
 		lastOccupiedSlotIndex = index - 1;
 
 		SlotUpdated?.Invoke(entry);
@@ -180,8 +180,10 @@ public class InventoryManager : MonoBehaviour
 						count -= currEntry.ItemsCount;
 						currEntry.ItemsCount = 0;
 						currEntry.Item = null;
-						UsedSlotsCount--;
 						lastOccupiedSlotIndex = i - 1;
+
+						if (currEntry.Cell.Index >= HotbarSize)
+							UsedSlotsCount--;
 
 						SlotUpdated?.Invoke(currEntry);
 						InventoryChanged?.Invoke();
@@ -235,8 +237,10 @@ public class InventoryManager : MonoBehaviour
 
 		if (slotEntry.ItemsCount == 0)
 		{
+			if (slotEntry.Cell.Index >= HotbarSize)
+				UsedSlotsCount--;
+
 			slotEntry.Item = null;
-			UsedSlotsCount--;
 			lastOccupiedSlotIndex = slotEntry.Cell.Index - 1;
 		}
 

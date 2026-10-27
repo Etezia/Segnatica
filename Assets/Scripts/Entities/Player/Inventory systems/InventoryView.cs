@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 [RequireComponent(typeof(InventoryManager))]
 public class InventoryView : MonoBehaviour
@@ -10,17 +9,17 @@ public class InventoryView : MonoBehaviour
 	[SerializeField] private TMP_Text itemNameText;
 	[SerializeField] private TMP_Text itemDescriptionsText;
 
+	[SerializeField] private TMP_Text slotsUsedText;
+
 	private InventoryManager inventoryManager;
 
-	private void Awake()
-	{
-		inventoryManager = GetComponent<InventoryManager>();
-	}
+	private void Awake() => inventoryManager = GetComponent<InventoryManager>();
 
 	private void OnEnable()
 	{
-		//inventoryManager.ItemAdded += ActivateCell;
-		//inventoryManager.ItemDropped += DisableCell;
+		RefreshFilledCellsCountText();
+		inventoryManager.InventoryChanged += RefreshFilledCellsCountText;
+
 		inventoryManager.SlotUpdated += UpdateCell;
 
 		inventoryManager.PointerEnteredCell += ActivateAndUpdateDescriptionPanel;
@@ -29,8 +28,8 @@ public class InventoryView : MonoBehaviour
 
 	private void OnDisable()
 	{
-		//inventoryManager.ItemAdded -= ActivateCell;
-		//inventoryManager.ItemDropped -= DisableCell;
+		inventoryManager.InventoryChanged -= RefreshFilledCellsCountText;
+
 		inventoryManager.SlotUpdated -= UpdateCell;
 
 		inventoryManager.PointerEnteredCell -= ActivateAndUpdateDescriptionPanel;
@@ -77,4 +76,7 @@ public class InventoryView : MonoBehaviour
 	}
 
 	private void DisableDescriptionPanel(ItemData itemData) => descriptionPanel.SetActive(false);
+
+	private void RefreshFilledCellsCountText() =>
+		slotsUsedText.text = $"Slots used: {inventoryManager.UsedSlotsCount} / {inventoryManager.BackpackSize}";
 }

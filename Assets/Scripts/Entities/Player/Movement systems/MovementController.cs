@@ -61,30 +61,35 @@ public class MovementController : MonoBehaviour
 	{
 		ApplyGravityForce();
 		var inputMoveVector = moveAction.ReadValue<Vector2>();
+		var initialVelocity = currVelocity;
 
 		if (charController.isGrounded)
 		{
-			currVelocity = transform.rotation * new Vector3(
-				inputMoveVector.x * currHorizontalSpeed, currVerticalSpeed, inputMoveVector.y * movementData.SideSpeedCoeff * currHorizontalSpeed);
-
 			if (inputMoveVector.y < 0)
-				currVelocity.z *= movementData.BackwardsSpeedCoeff;
+				inputMoveVector.y *= movementData.BackwardsSpeedCoeff;
+
+			currVelocity = transform.rotation * new Vector3(
+				inputMoveVector.x * currHorizontalSpeed * movementData.SideSpeedCoeff, currVerticalSpeed, inputMoveVector.y * currHorizontalSpeed);
 
 			if (lastControllerHit != null && Vector3.Angle(transform.up, lastControllerHit.normal) > charController.slopeLimit)
 			{
 				currVelocity /= 3;
 				currVelocity += movementData.SlopeSlidingCoeff * movementData.BasicSpeed * lastControllerHit.normal;
-				currVelocity.y -= gravityForce;
+				currVelocity.y -= gravityForce * 10;
 			}
 		}
 		else
 		{
-			currVelocity += new Vector3(
+			currVelocity += transform.rotation * new Vector3(
 				inputMoveVector.x * currHorizontalSpeed, 0f, inputMoveVector.y * movementData.SideSpeedCoeff * currHorizontalSpeed) * movementData.InAirControlCoeff;
 			currVelocity.y = currVerticalSpeed;
+			initialVelocity.y = currVerticalSpeed;
 		}
 
 		charController.Move(currVelocity * Time.deltaTime);
+
+		if (!charController.isGrounded)
+			currVelocity = initialVelocity;
 	}
 
 	private void OnControllerColliderHit(ControllerColliderHit hit) => lastControllerHit = hit;

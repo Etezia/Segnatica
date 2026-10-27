@@ -11,23 +11,25 @@ public class PlayerJournalUI : MonoBehaviour
 	[SerializeField] private GameObject bestiaryPanel;
 
 	[SerializeField] private InputActionAsset inputSystem;
-	private InputAction openInventoryAction;
+	private InputAction toggleInventoryPanel;
+	private InputAction toggleCraftingPanel;
+	private InputAction toggleBestiaryPanel;
 
 	private void Awake()
 	{
-		openInventoryAction = inputSystem.FindAction("OpenInventory");
+		toggleInventoryPanel = inputSystem.FindAction("OpenInventory");
 
 		MinimizeAllPanels();
 	}
 
 	private void OnEnable()
 	{
-		openInventoryAction.performed += SwitchInventoryDisplay;
+		toggleInventoryPanel.performed += ToggleInventoryDisplay;
 	}
 
 	private void OnDisable()
 	{
-		openInventoryAction.performed -= SwitchInventoryDisplay;
+		toggleInventoryPanel.performed -= ToggleInventoryDisplay;
 	}
 
 	private void MinimizeAllPanels()
@@ -42,7 +44,7 @@ public class PlayerJournalUI : MonoBehaviour
 		//bestiaryPanel.SetActive(false);
 	}
 
-	private void SwitchInventoryDisplay(InputAction.CallbackContext context)
+	private void ToggleInventoryDisplay(InputAction.CallbackContext context)
 	{
 		if (inventoryPanel.activeSelf)
 			MinimizeAllPanels();

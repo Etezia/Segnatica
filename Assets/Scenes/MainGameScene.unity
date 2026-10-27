@@ -999,6 +999,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4987689052908624288, guid: 0ded0b37b0067154699b8486ce3211f3, type: 3}
   m_PrefabInstance: {fileID: 761819258}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &217904389 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3859511387185427990, guid: 7f2736bbc4f6bb64aab628fa691c2aae, type: 3}
+  m_PrefabInstance: {fileID: 992440689}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &219087937
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3567,7 +3578,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3622412110883523395, guid: 7f2736bbc4f6bb64aab628fa691c2aae, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -4959,9 +4971,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 992440691}
     - target: {fileID: 7343846188260735321, guid: 6a27e0a745613744c9627bcd18b8bf51, type: 3}
+      propertyPath: slotsUsedText
+      value: 
+      objectReference: {fileID: 217904389}
+    - target: {fileID: 7343846188260735321, guid: 6a27e0a745613744c9627bcd18b8bf51, type: 3}
       propertyPath: descriptionPanel
       value: 
       objectReference: {fileID: 992440692}
+    - target: {fileID: 7343846188260735321, guid: 6a27e0a745613744c9627bcd18b8bf51, type: 3}
+      propertyPath: filledCellsCountText
+      value: 
+      objectReference: {fileID: 217904389}
     - target: {fileID: 7343846188260735321, guid: 6a27e0a745613744c9627bcd18b8bf51, type: 3}
       propertyPath: itemDescriptionsText
       value: 

@@ -1,5 +1,4 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -170,11 +169,18 @@ public class HotbarManager : MonoBehaviour
 
 	private void OnInvenoryItemDropped(SlotEntry entry)
 	{
+
+		var currSlotIndex = entry.Cell.Index;
+		if (currSlotIndex >= inventoryManager.HotbarSize)
+			return;
+
 		if (entry == currActiveSlot)
 			UnequipCurrItem();
 
-		var currSlotIndex = entry.Cell.Index;
-		Destroy(hotbarItems[currSlotIndex].gameObject);
-		hotbarItems[currSlotIndex] = null;
+		if (hotbarItems[currSlotIndex] != null)
+		{
+			Destroy(hotbarItems[currSlotIndex].gameObject);
+			hotbarItems[currSlotIndex] = null;
+		}
 	}
 }
