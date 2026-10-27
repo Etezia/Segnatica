@@ -5,7 +5,7 @@ public class PlayerSockets : MonoBehaviour
     public static PlayerSockets Instance { get; private set; }
 
     [field: SerializeField] public Transform ItemDropPoint { get; private set; }
-	[field: SerializeField] public Transform WeaponHolderpPoint { get; private set; }
+	[field: SerializeField] public Transform WeaponHolderPoint { get; private set; }
 
 	private void Awake()
 	{

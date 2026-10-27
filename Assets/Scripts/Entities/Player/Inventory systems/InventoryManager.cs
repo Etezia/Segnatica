@@ -10,13 +10,13 @@ public class InventoryManager : MonoBehaviour
 
 	[SerializeField] private NaturalNeedsSystem playerNeedsSystem;
 
-	[SerializeField] private int hotbarSize = 8;
-	[SerializeField] private int backpackSize = 35;
+	[field: SerializeField] public int HotbarSize { get; private set; } = 8;
+	[field: SerializeField] public int BackpackSize { get; private set; } = 35;
 
-	private int inventorySize => hotbarSize + backpackSize;
+	private int inventorySize => HotbarSize + BackpackSize;
 	private int lastOccupiedSlotIndex = -1;
 
-	private List<SlotEntry> slotEntries;
+	public List<SlotEntry> SlotEntries { get; private set; }
 	private Dictionary<int, int> itemCountById;
 
 	public int SlotsCount { get; private set; } = 0;
@@ -34,22 +34,22 @@ public class InventoryManager : MonoBehaviour
 
 	private void Awake()
 	{
-		slotEntries = new List<SlotEntry>();
+		SlotEntries = new List<SlotEntry>();
 		itemCountById = new Dictionary<int, int>();
 
-		for (var i = 0; i < hotbarSize + backpackSize; i++)
+		for (var i = 0; i < HotbarSize + BackpackSize; i++)
 		{
-			var cell = Instantiate(inventoryCellPrefab, i < hotbarSize ? hotbarTransform : backpackPanelTransform);
-			slotEntries.Add(new SlotEntry(cell));
+			var cell = Instantiate(inventoryCellPrefab, i < HotbarSize ? hotbarTransform : backpackPanelTransform);
+			SlotEntries.Add(new SlotEntry(cell));
 			cell.Index = i;
 		}
-		SlotsCount = backpackSize;
+		SlotsCount = BackpackSize;
 		lastOccupiedSlotIndex = -1;
 	}
 
 	private void OnEnable()
 	{
-		foreach (var entry in slotEntries)
+		foreach (var entry in SlotEntries)
 		{
 			entry.Cell.RMBClicked += DropItemsFromSlot;
 			entry.Cell.LMBClicked += TryUseItem;
@@ -60,7 +60,7 @@ public class InventoryManager : MonoBehaviour
 
 	private void OnDisable()
 	{
-		foreach (var entry in slotEntries)
+		foreach (var entry in SlotEntries)
 		{
 			entry.Cell.RMBClicked -= DropItemsFromSlot;
 			entry.Cell.LMBClicked -= TryUseItem;
@@ -73,8 +73,8 @@ public class InventoryManager : MonoBehaviour
 	{
 		playerNeedsSystem = GameObject.FindWithTag("Player").GetComponent<NaturalNeedsSystem>();
 
-		hotbarSize = 8;
-		backpackSize = 35;
+		HotbarSize = 8;
+		BackpackSize = 35;
 	}
 
 	public int AddItemsIfPossible(ItemData item, int itemsCount)
@@ -84,9 +84,9 @@ public class InventoryManager : MonoBehaviour
 		if (!itemCountById.ContainsKey(item.Id))
 			itemCountById.Add(item.Id, 0);
 
-		for (var i = item.IsEquipable ? 0 : hotbarSize; i < inventorySize; i++)
+		for (var i = item.IsEquipable ? 0 : HotbarSize; i < inventorySize; i++)
 		{
-			var currSlotEntry = slotEntries[i];
+			var currSlotEntry = SlotEntries[i];
 			var currCell = currSlotEntry.Cell;
 
 			if (currSlotEntry.Item == null)
@@ -143,7 +143,7 @@ public class InventoryManager : MonoBehaviour
 
 	private void DropItemsFromSlot(int index)
 	{
-		var entry = slotEntries[index];
+		var entry = SlotEntries[index];
 		if (entry.Item == null)
 			return;
 
@@ -172,7 +172,7 @@ public class InventoryManager : MonoBehaviour
 
 			for (var i = lastOccupiedSlotIndex; i >= 0; i--)
 			{
-				var currEntry = slotEntries[i];
+				var currEntry = SlotEntries[i];
 				if (currEntry.Item && currEntry.Item.Id == id)
 				{
 					if (currEntry.ItemsCount <= count)
@@ -181,6 +181,7 @@ public class InventoryManager : MonoBehaviour
 						currEntry.ItemsCount = 0;
 						currEntry.Item = null;
 						UsedSlotsCount--;
+						lastOccupiedSlotIndex = i - 1;
 
 						SlotUpdated?.Invoke(currEntry);
 						InventoryChanged?.Invoke();
@@ -203,19 +204,19 @@ public class InventoryManager : MonoBehaviour
 
 	private void OnPointerEnteredCell(int index)
 	{
-		if (slotEntries[index].Item)
-			PointerEnteredCell?.Invoke(slotEntries[index].Item);
+		if (SlotEntries[index].Item)
+			PointerEnteredCell?.Invoke(SlotEntries[index].Item);
 	}
 
 	private void OnPointerExitedCell(int index)
 	{
-		if (slotEntries[index].Item)
-			PointerExitedCell?.Invoke(slotEntries[index].Item);
+		if (SlotEntries[index].Item)
+			PointerExitedCell?.Invoke(SlotEntries[index].Item);
 	}
 
 	private void TryUseItem(int index)
 	{
-		var item = slotEntries[index].Item;
+		var item = SlotEntries[index].Item;
 		if (item && item.IsUsable)
 		{
 			if (item is ConsumableItemData)
@@ -224,7 +225,7 @@ public class InventoryManager : MonoBehaviour
 				playerNeedsSystem.IncreaseHydration((item as ConsumableItemData).ThirstRecovery);
 			}
 
-			RefreshItemDataAfterUsing(slotEntries[index]);
+			RefreshItemDataAfterUsing(SlotEntries[index]);
 		}
 	}
 

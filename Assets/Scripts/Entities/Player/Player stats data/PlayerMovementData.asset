@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: PlayerMovementData
   m_EditorClassIdentifier: Assembly-CSharp::CharacterMovementData
   <BasicSpeed>k__BackingField: 10
-  <RunSpeed>k__BackingField: 25
+  <RunSpeed>k__BackingField: 16
   <CrouchSpeed>k__BackingField: 3
   <SideSpeedCoeff>k__BackingField: 0.8
   <BackwardsSpeedCoeff>k__BackingField: 0.6
   <InAirControlCoeff>k__BackingField: 0.002
-  <JumpForce>k__BackingField: 16
+  <JumpForce>k__BackingField: 7
   <SlopeSlidingCoeff>k__BackingField: 0.8
