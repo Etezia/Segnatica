@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -95,18 +96,23 @@ public class HotbarManager : MonoBehaviour
 
 		UnequipCurrItem();
 
-		var currActiveSlot = inventoryManager.SlotEntries[index];
+		currActiveSlot = inventoryManager.SlotEntries[index];
 
 		if (!itemHighlightImage.gameObject.activeSelf)
 			itemHighlightImage.gameObject.SetActive(true);
 		itemHighlightImage.transform.position = currActiveSlot.Cell.transform.position;
 
-		EquipCurrItem();
+		if (currActiveSlot.Item != null)
+			EquipCurrItem();
 	}
 
 	private void EquipCurrItem()
 	{
+		if (currActiveSlot == null)
+			return;
+
 		var currItem = currActiveSlot.Item;
+
 		if (currItem.Type == ItemType.Weapon || currItem.Type == ItemType.Tool)
 		{
 			currEquippedItem = Instantiate(currItem.PhysicalObject, weaponHolderPoint);
@@ -138,12 +144,13 @@ public class HotbarManager : MonoBehaviour
 		if (itemHighlightImage.gameObject.activeSelf)
 			itemHighlightImage.gameObject.SetActive(false);
 
+		currActiveSlot = null;
 		UnequipCurrItem();
 	}
 
 	private void OnInvenoryItemAdded(SlotEntry entry)
 	{
-		if (entry == currActiveSlot)
+		if (!currEquippedItem && currActiveSlot != null && entry == currActiveSlot)
 			EquipCurrItem();
 	}
 
