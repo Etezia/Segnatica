@@ -25,10 +25,13 @@ public class HotbarManager : MonoBehaviour
 	private InputAction selectHotbarSlot8;
 	private InputAction deselectHotbarSlot;
 
+	private PickableItem[] hotbarItems;
+
 	private void Awake()
 	{
 		weaponHolderPoint = playerSockets.WeaponHolderPoint;
 		inventoryManager = GetComponent<InventoryManager>();
+		hotbarItems = new PickableItem[inventoryManager.HotbarSize];
 
 		selectHotbarSlot1 = inputSystem.FindAction("SelectHotbarSlot1");
 		selectHotbarSlot2 = inputSystem.FindAction("SelectHotbarSlot2");
@@ -112,21 +115,32 @@ public class HotbarManager : MonoBehaviour
 			return;
 
 		var currItem = currActiveSlot.Item;
+		var currSlotIndex = currActiveSlot.Cell.Index;
 
-		if (currItem.Type == ItemType.Weapon || currItem.Type == ItemType.Tool)
+		if (hotbarItems[currSlotIndex] != null)
 		{
-			currEquippedItem = Instantiate(currItem.PhysicalObject, weaponHolderPoint);
-			currEquippedItem.transform.localPosition = Vector3.zero;
-			currEquippedItem.transform.localRotation = Quaternion.Euler(Vector3.zero);
+			hotbarItems[currSlotIndex].gameObject.SetActive(true);
+			currEquippedItem = hotbarItems[currSlotIndex];
+		}
+		else
+		{
+			if (currItem.Type == ItemType.Weapon || currItem.Type == ItemType.Tool)
+			{
+				currEquippedItem = Instantiate(currItem.PhysicalObject, weaponHolderPoint);
+				currEquippedItem.transform.localPosition = Vector3.zero;
+				currEquippedItem.transform.localRotation = Quaternion.Euler(Vector3.zero);
 
-			currEquippedItem.gameObject.layer = 0;
-			currEquippedItem.GetComponent<PickableItem>().enabled = false;
-			currEquippedItem.GetComponent<InteractableItem>().enabled = false;
+				currEquippedItem.gameObject.layer = 0;
+				currEquippedItem.GetComponent<PickableItem>().enabled = false;
+				currEquippedItem.GetComponent<InteractableItem>().enabled = false;
 
-			if (currEquippedItem.TryGetComponent<Animator>(out var animator))
-				animator.enabled = true;
-			if (currEquippedItem.TryGetComponent<MeleeWeapon>(out var weaponScript))
-				weaponScript.enabled = true;
+				if (currEquippedItem.TryGetComponent<Animator>(out var animator))
+					animator.enabled = true;
+				if (currEquippedItem.TryGetComponent<MeleeWeapon>(out var weaponScript))
+					weaponScript.enabled = true;
+
+				hotbarItems[currSlotIndex] = currEquippedItem;
+			}
 		}
 	}
 
@@ -134,7 +148,7 @@ public class HotbarManager : MonoBehaviour
 	{
 		if (currEquippedItem)
 		{
-			Destroy(currEquippedItem.gameObject);
+			currEquippedItem.gameObject.SetActive(false);
 			currEquippedItem = null;
 		}
 	}
@@ -150,7 +164,7 @@ public class HotbarManager : MonoBehaviour
 
 	private void OnInvenoryItemAdded(SlotEntry entry)
 	{
-		if (!currEquippedItem && currActiveSlot != null && entry == currActiveSlot)
+		if (currActiveSlot != null && entry == currActiveSlot && !currEquippedItem)
 			EquipCurrItem();
 	}
 
@@ -158,5 +172,9 @@ public class HotbarManager : MonoBehaviour
 	{
 		if (entry == currActiveSlot)
 			UnequipCurrItem();
+
+		var currSlotIndex = entry.Cell.Index;
+		Destroy(hotbarItems[currSlotIndex].gameObject);
+		hotbarItems[currSlotIndex] = null;
 	}
 }
