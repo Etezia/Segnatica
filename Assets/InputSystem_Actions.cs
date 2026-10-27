@@ -217,6 +217,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DeselectHotbatSlot"",
+                    ""type"": ""Button"",
+                    ""id"": ""a7407bc2-90a9-4ef2-ab20-3e50549480e4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -415,6 +424,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""SelectHotbarSlot8"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""df9f94ff-906e-42dd-8080-2ebee431d0ff"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""DeselectHotbatSlot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -704,6 +724,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_SelectHotbarSlot6 = m_Player.FindAction("SelectHotbarSlot6", throwIfNotFound: true);
         m_Player_SelectHotbarSlot7 = m_Player.FindAction("SelectHotbarSlot7", throwIfNotFound: true);
         m_Player_SelectHotbarSlot8 = m_Player.FindAction("SelectHotbarSlot8", throwIfNotFound: true);
+        m_Player_DeselectHotbatSlot = m_Player.FindAction("DeselectHotbatSlot", throwIfNotFound: true);
         // PlayerCamera
         m_PlayerCamera = asset.FindActionMap("PlayerCamera", throwIfNotFound: true);
         m_PlayerCamera_RotateCamera = m_PlayerCamera.FindAction("RotateCamera", throwIfNotFound: true);
@@ -816,6 +837,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SelectHotbarSlot6;
     private readonly InputAction m_Player_SelectHotbarSlot7;
     private readonly InputAction m_Player_SelectHotbarSlot8;
+    private readonly InputAction m_Player_DeselectHotbatSlot;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -884,6 +906,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @SelectHotbarSlot8 => m_Wrapper.m_Player_SelectHotbarSlot8;
         /// <summary>
+        /// Provides access to the underlying input action "Player/DeselectHotbatSlot".
+        /// </summary>
+        public InputAction @DeselectHotbatSlot => m_Wrapper.m_Player_DeselectHotbatSlot;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -951,6 +977,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @SelectHotbarSlot8.started += instance.OnSelectHotbarSlot8;
             @SelectHotbarSlot8.performed += instance.OnSelectHotbarSlot8;
             @SelectHotbarSlot8.canceled += instance.OnSelectHotbarSlot8;
+            @DeselectHotbatSlot.started += instance.OnDeselectHotbatSlot;
+            @DeselectHotbatSlot.performed += instance.OnDeselectHotbatSlot;
+            @DeselectHotbatSlot.canceled += instance.OnDeselectHotbatSlot;
         }
 
         /// <summary>
@@ -1004,6 +1033,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @SelectHotbarSlot8.started -= instance.OnSelectHotbarSlot8;
             @SelectHotbarSlot8.performed -= instance.OnSelectHotbarSlot8;
             @SelectHotbarSlot8.canceled -= instance.OnSelectHotbarSlot8;
+            @DeselectHotbatSlot.started -= instance.OnDeselectHotbatSlot;
+            @DeselectHotbatSlot.performed -= instance.OnDeselectHotbatSlot;
+            @DeselectHotbatSlot.canceled -= instance.OnDeselectHotbatSlot;
         }
 
         /// <summary>
@@ -1561,6 +1593,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSelectHotbarSlot8(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DeselectHotbatSlot" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDeselectHotbatSlot(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "PlayerCamera" which allows adding and removing callbacks.

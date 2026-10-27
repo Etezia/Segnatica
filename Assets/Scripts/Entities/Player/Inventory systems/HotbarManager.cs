@@ -22,6 +22,7 @@ public class HotbarManager : MonoBehaviour
 	private InputAction selectHotbarSlot6;
 	private InputAction selectHotbarSlot7;
 	private InputAction selectHotbarSlot8;
+	private InputAction deselectHotbarSlot;
 
 	private void Awake()
 	{
@@ -36,10 +37,14 @@ public class HotbarManager : MonoBehaviour
 		selectHotbarSlot6 = inputSystem.FindAction("SelectHotbarSlot6");
 		selectHotbarSlot7 = inputSystem.FindAction("SelectHotbarSlot7");
 		selectHotbarSlot8 = inputSystem.FindAction("SelectHotbarSlot8");
+		deselectHotbarSlot = inputSystem.FindAction("DeselectHotbatSlot");
 	}
 
 	private void OnEnable()
 	{
+		inventoryManager.ItemAdded += OnInvenoryItemAdded;
+		inventoryManager.ItemDropped += OnInvenoryItemDropped;
+
 		selectHotbarSlot1.performed += SelectHotbarItem1;
 		selectHotbarSlot2.performed += SelectHotbarItem2;
 		selectHotbarSlot3.performed += SelectHotbarItem3;
@@ -48,10 +53,14 @@ public class HotbarManager : MonoBehaviour
 		selectHotbarSlot6.performed += SelectHotbarItem6;
 		selectHotbarSlot7.performed += SelectHotbarItem7;
 		selectHotbarSlot8.performed += SelectHotbarItem8;
+		deselectHotbarSlot.performed += DeselectHotbarItem;
 	}
 
 	private void OnDisable()
 	{
+		inventoryManager.ItemAdded -= OnInvenoryItemAdded;
+		inventoryManager.ItemDropped -= OnInvenoryItemDropped;
+
 		selectHotbarSlot1.performed -= SelectHotbarItem1;
 		selectHotbarSlot2.performed -= SelectHotbarItem2;
 		selectHotbarSlot3.performed -= SelectHotbarItem3;
@@ -60,6 +69,7 @@ public class HotbarManager : MonoBehaviour
 		selectHotbarSlot6.performed -= SelectHotbarItem6;
 		selectHotbarSlot7.performed -= SelectHotbarItem7;
 		selectHotbarSlot8.performed -= SelectHotbarItem8;
+		deselectHotbarSlot.performed -= DeselectHotbarItem;
 	}
 
 	private void SelectHotbarItem1(InputAction.CallbackContext context) => SelectHotbarItem(0);
@@ -83,11 +93,7 @@ public class HotbarManager : MonoBehaviour
 		if (inventoryManager.HotbarSize < index)
 			return;
 
-		if (currEquippedItem)
-		{
-			Destroy(currEquippedItem.gameObject);
-			currEquippedItem = null;
-		}
+		UnequipCurrItem();
 
 		var currActiveSlot = inventoryManager.SlotEntries[index];
 
@@ -95,6 +101,11 @@ public class HotbarManager : MonoBehaviour
 			itemHighlightImage.gameObject.SetActive(true);
 		itemHighlightImage.transform.position = currActiveSlot.Cell.transform.position;
 
+		EquipCurrItem();
+	}
+
+	private void EquipCurrItem()
+	{
 		var currItem = currActiveSlot.Item;
 		if (currItem.Type == ItemType.Weapon || currItem.Type == ItemType.Tool)
 		{
@@ -113,15 +124,32 @@ public class HotbarManager : MonoBehaviour
 		}
 	}
 
-	private void DeselectHotbarItem()
+	private void UnequipCurrItem()
 	{
-		if (itemHighlightImage.gameObject.activeSelf)
-			itemHighlightImage.gameObject.SetActive(false);
-
 		if (currEquippedItem)
 		{
 			Destroy(currEquippedItem.gameObject);
 			currEquippedItem = null;
 		}
+	}
+
+	private void DeselectHotbarItem(InputAction.CallbackContext context)
+	{
+		if (itemHighlightImage.gameObject.activeSelf)
+			itemHighlightImage.gameObject.SetActive(false);
+
+		UnequipCurrItem();
+	}
+
+	private void OnInvenoryItemAdded(SlotEntry entry)
+	{
+		if (entry == currActiveSlot)
+			EquipCurrItem();
+	}
+
+	private void OnInvenoryItemDropped(SlotEntry entry)
+	{
+		if (entry == currActiveSlot)
+			UnequipCurrItem();
 	}
 }

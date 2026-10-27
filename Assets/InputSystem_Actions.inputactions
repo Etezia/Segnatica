@@ -131,6 +131,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "DeselectHotbatSlot",
+                    "type": "Button",
+                    "id": "a7407bc2-90a9-4ef2-ab20-3e50549480e4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -329,6 +338,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "SelectHotbarSlot8",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "df9f94ff-906e-42dd-8080-2ebee431d0ff",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "DeselectHotbatSlot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
