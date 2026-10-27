@@ -40,7 +40,7 @@ public class BuildManager : MonoBehaviour
 
 	private void SpawnFoundation(InputAction.CallbackContext context)
 	{
-		if (inventoryManager.TryRemoveItems(2, 9))
+		if (inventoryManager.TryRemoveItems(2, 2))
 		{
 			ResetPlacementSystem();
 			buildingPlacementSystem.SpawnConstruction(currConstructionAsset.Foundation);

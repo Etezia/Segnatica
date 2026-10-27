@@ -33,7 +33,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.633, z: 0.158}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6369119215092374532}
   m_Father: {fileID: 4332832564437635290}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &5880744224612144909
@@ -210,6 +211,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4332832564437635290}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4577075633698799645
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6369119215092374532}
+  m_Layer: 3
+  m_Name: Weapon holder point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6369119215092374532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4577075633698799645}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.00068269146, y: 0.001384974, z: -0.18385467, w: 0.98295224}
+  m_LocalPosition: {x: 0.5090027, y: -0.33000624, z: 0.65300465}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2231241902281873291}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6636072680992011002
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,6 +410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSockets
   <ItemDropPoint>k__BackingField: {fileID: 171794198303345268}
+  <WeaponHolderpPoint>k__BackingField: {fileID: 6369119215092374532}
 --- !u!114 &6998390511367610496
 MonoBehaviour:
   m_ObjectHideFlags: 0

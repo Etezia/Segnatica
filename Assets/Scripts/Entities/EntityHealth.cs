@@ -29,7 +29,8 @@ public class EntityHealth : MonoBehaviour
 
 	public void GetDamage(float value)
 	{
-		CurrHealth -= value * (currArmor * currArmor) / (healthData.MaxArmor * healthData.MaxArmor);
+		CurrHealth -= value;
+		print(CurrHealth);
 		if (CurrHealth <= 0)
 		{
 			OnDeath?.Invoke();

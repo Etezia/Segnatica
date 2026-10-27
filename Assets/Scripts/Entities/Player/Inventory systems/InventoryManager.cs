@@ -180,6 +180,7 @@ public class InventoryManager : MonoBehaviour
 						count -= currEntry.ItemsCount;
 						currEntry.ItemsCount = 0;
 						currEntry.Item = null;
+						UsedSlotsCount--;
 
 						SlotUpdated?.Invoke(currEntry);
 						InventoryChanged?.Invoke();
@@ -188,6 +189,7 @@ public class InventoryManager : MonoBehaviour
 					else
 					{
 						currEntry.ItemsCount -= count;
+						lastOccupiedSlotIndex = i;
 
 						SlotUpdated?.Invoke(currEntry);
 						InventoryChanged?.Invoke();
@@ -233,7 +235,8 @@ public class InventoryManager : MonoBehaviour
 		if (slotEntry.ItemsCount == 0)
 		{
 			slotEntry.Item = null;
-			ItemDropped?.Invoke(slotEntry);
+			UsedSlotsCount--;
+			lastOccupiedSlotIndex = slotEntry.Cell.Index - 1;
 		}
 
 		SlotUpdated?.Invoke(slotEntry);
