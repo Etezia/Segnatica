@@ -12,7 +12,7 @@ public class DamageModifiersData : ScriptableObject
 
 	public Dictionary<EntityType, float> DamageModifiers { get; private set; }
 
-	private void Awake()
+	private void OnValidate()
 	{
 		DamageModifiers = new Dictionary<EntityType, float>()
 		{

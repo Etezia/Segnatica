@@ -63,7 +63,10 @@ public class MeleeWeapon : EquipableItem
 			{
 				if (overlappedColliders[j].TryGetComponent<EntityHealth>(out var entityHealth))
 				{
-					entityHealth.GetDamage(basicDamage * damageModifiersData.DamageModifiers[entityHealth.Type]);
+					if (damageModifiersData.DamageModifiers.TryGetValue(entityHealth.Type, out var damageModifier))
+						entityHealth.GetDamage(basicDamage * damageModifier);
+					else
+						entityHealth.GetDamage(basicDamage);
 				}
 			}
 

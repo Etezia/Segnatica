@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StoneAxeDamage
   m_EditorClassIdentifier: Assembly-CSharp::DamageModifiersData
   playerDamageMod: 0
-  basicEnemyDamageMod: 25
-  vegetationDamageMod: 50
+  basicEnemyDamageMod: 0.8
+  vegetationDamageMod: 1.05
   mineralDamageMod: 0
-  constructionDamageMod: 35
+  constructionDamageMod: 0.64
