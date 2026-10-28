@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(BoxCollider), typeof(Animator))]
-public class MeleeWeapon : MonoBehaviour
+public class MeleeWeapon : EquipableItem
 {
     [SerializeField] private LayerMask damageableLayers;
 	[SerializeField] private BoxCollider collider;
@@ -63,7 +63,7 @@ public class MeleeWeapon : MonoBehaviour
 			{
 				if (overlappedColliders[j].TryGetComponent<EntityHealth>(out var entityHealth))
 				{
-					entityHealth.GetDamage(basicDamage);
+					entityHealth.GetDamage(basicDamage * damageModifiersData.DamageModifiers[entityHealth.Type]);
 				}
 			}
 

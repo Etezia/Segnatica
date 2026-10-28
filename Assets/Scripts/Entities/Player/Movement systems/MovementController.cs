@@ -8,6 +8,8 @@ public class MovementController : MonoBehaviour
 	[SerializeField] private CharacterController charController;
 	[SerializeField] private CharacterMovementData movementData;
 	[SerializeField] private float gravityForce;
+	[SerializeField] private float crouchCharacterHeight = 0.8f;
+	private float normalCharacterHeight;
 	private float currHorizontalSpeed;
 	private float currVerticalSpeed;
 
@@ -26,11 +28,13 @@ public class MovementController : MonoBehaviour
     private InputAction crouchAction;
 	private InputAction jumpAction;
 
-	public event Action OnJump;
+	public event Action PlayerJump;
 
 	private void Awake()
 	{
 		charController = GetComponent<CharacterController>();
+
+		normalCharacterHeight = charController.height;
 
 		moveAction = inputSystem.FindAction("Move");
 		runAction = inputSystem.FindAction("Run");
@@ -104,9 +108,11 @@ public class MovementController : MonoBehaviour
 
 	private void Jump(InputAction.CallbackContext context)
 	{
+		charController.height = normalCharacterHeight;
+
 		if (charController.isGrounded)
 			currVerticalSpeed += movementData.JumpForce;
-		OnJump?.Invoke();
+		PlayerJump?.Invoke();
 	}
 
     private void SubscribeOnInputActions()
@@ -136,6 +142,8 @@ public class MovementController : MonoBehaviour
 
 	private void ApplyDefaultMovementValues()
 	{
+		charController.height = normalCharacterHeight;
+
 		currHorizontalSpeed = movementData.BasicSpeed;
 		isRunning = false;
 		isCrouching = false;
@@ -143,6 +151,8 @@ public class MovementController : MonoBehaviour
 
     private void SwitchToRun(InputAction.CallbackContext context)
     {
+		charController.height = normalCharacterHeight;
+
 		currHorizontalSpeed = movementData.RunSpeed;
 		isRunning = true;
 		isCrouching = false;
@@ -150,6 +160,8 @@ public class MovementController : MonoBehaviour
 
     private void SwitchToCrouch(InputAction.CallbackContext context)
     {
+		charController.height = crouchCharacterHeight;
+
 		currHorizontalSpeed = movementData.CrouchSpeed;
 		isRunning = false;
 		isCrouching = true;

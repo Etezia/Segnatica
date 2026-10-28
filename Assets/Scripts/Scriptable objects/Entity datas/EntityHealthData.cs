@@ -5,4 +5,5 @@ public class EntityHealthData : ScriptableObject
 {
 	[field: SerializeField] public float MaxHealth { get; private set; }
 	[field: SerializeField] public float MaxArmor { get; private set; }
+	[field: SerializeField] public EntityType EntityType { get; private set; }
 }

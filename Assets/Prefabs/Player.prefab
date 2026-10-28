@@ -379,8 +379,9 @@ MonoBehaviour:
   charController: {fileID: 5001685514207205669}
   movementData: {fileID: 11400000, guid: ffb0071e658a03a49ad37420a210020d, type: 2}
   gravityForce: 18
+  crouchCharacterHeight: 0.8
   isHoldToRun: 1
-  isHoldToCrouch: 1
+  isHoldToCrouch: 0
   inputSystem: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!114 &7923851744996212996
 MonoBehaviour:

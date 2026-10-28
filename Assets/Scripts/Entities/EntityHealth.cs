@@ -9,6 +9,8 @@ public class EntityHealth : MonoBehaviour
 	private float currHealth;
 	private float currArmor;
 
+	public EntityType Type => healthData.EntityType;
+
 	public event Action OnDeath;
 
 	public float CurrHealth
@@ -36,7 +38,6 @@ public class EntityHealth : MonoBehaviour
 			OnDeath?.Invoke();
 			Destroy(gameObject);
 		}
-		
 	}
 
 	public void HealUp(float value)

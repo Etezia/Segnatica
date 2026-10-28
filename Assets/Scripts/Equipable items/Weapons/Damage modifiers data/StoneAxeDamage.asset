@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3edb04c0eac1324db6e3994be612520, type: 3}
   m_Name: StoneAxeDamage
   m_EditorClassIdentifier: Assembly-CSharp::DamageModifiersData
-  <EnemyDamageMod>k__BackingField: 1
-  <VegetationDamageMod>k__BackingField: 1.1
-  <MineralDamageMod>k__BackingField: 0
-  <ConstructionDamageMod>k__BackingField: 0.1
+  playerDamageMod: 0
+  basicEnemyDamageMod: 25
+  vegetationDamageMod: 50
+  mineralDamageMod: 0
+  constructionDamageMod: 35

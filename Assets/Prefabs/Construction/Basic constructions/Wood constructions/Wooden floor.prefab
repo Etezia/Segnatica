@@ -674,6 +674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityHealth
   healthData: {fileID: 11400000, guid: 630b1c36b14019b4b8eed5c18cec81c7, type: 2}
+  Type: 4
 --- !u!114 &2823081588520947468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,7 +687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72039e8ac2c6c3e439b7e27a36438c28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Construction
-  constructionName: Wooden flor
+  constructionName: Wooden floor
 --- !u!1 &4665288024801963685
 GameObject:
   m_ObjectHideFlags: 0

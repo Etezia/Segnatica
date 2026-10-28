@@ -169,7 +169,6 @@ public class HotbarManager : MonoBehaviour
 
 	private void OnInvenoryItemDropped(SlotEntry entry)
 	{
-
 		var currSlotIndex = entry.Cell.Index;
 		if (currSlotIndex >= inventoryManager.HotbarSize)
 			return;
