@@ -32,7 +32,7 @@ public class EntityHealth : MonoBehaviour
 	public void GetDamage(float value)
 	{
 		CurrHealth -= value;
-		print(CurrHealth);
+		Debug.Log(CurrHealth);
 		if (CurrHealth <= 0)
 		{
 			OnDeath?.Invoke();

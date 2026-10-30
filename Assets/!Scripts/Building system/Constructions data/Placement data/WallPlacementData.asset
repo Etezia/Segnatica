@@ -17,3 +17,4 @@ MonoBehaviour:
     m_Bits: 2048
   <AllowedMountingMaterial>k__BackingField: {fileID: 2100000, guid: 78e17ca5a44a7b040a35acf9e0187bd8, type: 2}
   <ForbiddenMountingMaterial>k__BackingField: {fileID: 2100000, guid: abcf7adc53e6e1849b9cde323436452c, type: 2}
+  <OverlappingColliderScale>k__BackingField: {x: 0.96, y: 0.96, z: 1}
